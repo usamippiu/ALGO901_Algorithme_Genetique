@@ -30,7 +30,7 @@ class RoueDeLaFortune(Selection):
         nombreAlea = random.uniform(0, total_performance)
 
         # Parcours de la population et sélection de l'individu choisi
-        perf = 0  # choix initial
+        perf = 0
         for individu in self.population:
             # calcul de la performance de l'individu (évaluation par la fonction)
             perf += self.performance(individu)
@@ -60,11 +60,11 @@ if __name__=="__main__":
     def g(x):
         return math.sqrt(x)
     
-    x1 = f(1)
-    x2 = f(2)
-    x3 = f(3)
-    x4 = f(4)
-    x5 = f(5)
+    x1 = 1
+    x2 = 2
+    x3 = 3
+    x4 = 4
+    x5 = 5
 
     population = [x1,x2,x3,x4,x5]
 
