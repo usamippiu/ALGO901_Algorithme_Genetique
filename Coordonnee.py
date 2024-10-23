@@ -3,7 +3,7 @@
 from Fenetre import Fenetre
 from CodageBinaire import Codage, CodageBinaire
 
-class coordonnees:
+class Coordonnee:
     def __init__(self, valeur, fenetre, typeCodage):
         self.nom = fenetre.nom  # liste de string par exemple dans R^3 on aurait [x,y,z]
         self.valeur = valeur    # liste de valeurs correspondantes, par exemple dans R^3 on aurait (2,4,5)
