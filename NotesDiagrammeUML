@@ -1,0 +1,44 @@
+Classe Population
+	Attributs :
+		individus -> List, contient les individus constituant notre population.
+		effectif -> Integer, effectif de la population.
+		fenetre -> Fenetre, représente les limites du pavé de Rn dans lequel est généré notre population.
+		f -> Fonction qui correspond au pronblème d'optimisation que notre algorithme essaie de résoudre.
+		e -> Fonction d'erreur d'approximation de la solution.
+		epsilon -> Float, seuil d'erreur s'approximation du problème d'optimisation.
+	Méthodes :
+		code() -> Fonction qui appel la méthode code() sur chaque individus (Voir description de la classe Individu)
+		decode() -> Fonction qui appel la méthode code() sur chaque individus (Voir description de la classe Individu) 
+		rechercheSol() -> Fonction qui évalue chaques individus comme potentielle solution de notre problème 
+		                            d'optimisation f en appelant la méthode evaluation() de chaque individus. Si plusieurs 
+		                            solutions satisfaisantes sont détectées on prend celle dont l'erreur d'approximation est 
+		                            la plus petite.
+		genese() -> Génération aléatoire d'une population d'individu de taille effectif
+
+classe Individu
+	Attributs :
+		coordonnees -> Coordonnees, version binaire ou réel.
+		f -> Fonction qui correspond au pronblème d'optimisation que notre algoirithme essaie de résoudre.
+		e -> Fonction d'erreur d'approximation de la solution.
+		epsilon -> Float, seuil d'erreur s'approximation du problème d'optimisation.
+	Méthodes :
+		code() -> Méthode qui encode les coordonnées en binaire.
+		decode() -> Méthode qui décode les coordonnées de binaire à réel.
+		evaluation() -> Méthode qui évalue un individu qualitativement comme solution du probème d'optimisation f.
+		
+		
+QUESTIONS :
+	- Implémentation fonction de mesure d'erreur ? Choix de cette fonction ?
+	- Génèse au moment de la création de l'objet Population ?
+	- Renommer Fenetre en un nom plus approprié ?
+
+IDEES:
+	- Faire une évolution des individus juste après la Genèse
+	- Paramètres d'entrée : f, e, epsilon, P (Pavé de Rn, la dimension concsidéré serait détuite de la forme de celui-ci)
+
+TACHES : 
+	- Corriger diagramme ULM + notes ULM -> fenetre est pour une seule coordonée !
+	- Implémenter changements notes tableaux, utiliser la méthodes de prise en charge des codages comme des méthodes dans une classe 
+	  fille de Codage, pareil pour les fonction erreur (Voir les photos de tableaux)
+	- Changer les paramètres d'entrée
+	- Extraction des autres idées des photos du tableau
