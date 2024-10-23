@@ -2,6 +2,7 @@ import random
 
 
 class Croisement:
+    # En pratique, on aura une liste [individu1.coordonnees.codeBaseX() , ... ]
     def __init__(self, selected_individuals):
         """
         Initialisation de la classe Croisement avec les individus sélectionnés.
