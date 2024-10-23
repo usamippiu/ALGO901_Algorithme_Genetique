@@ -15,10 +15,13 @@ Classes
     code(individu)
 - CodageMatriceExposant
     code(individu)
-- 
+- CodeHexadecimal
+    code(individu)
 - Selection
     prendre_deux(population)
-- 
+- Performance
+    nom
+    eval(coordonnees)
 
 --------------------------------------------------------------------------------------------------------------------------
 
