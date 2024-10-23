@@ -1,6 +1,7 @@
 # Importer la classe coordonnées
 # Importer la classe performance
 # Importer la classe croisement
+from Coordonnees import Coordonnees
 
 class Individu:
     def __init__(self, coordonnees, performance):
