@@ -2,19 +2,19 @@ import math
 
 
 class Codage:
-    def code(self, individu):
+    def code(self, coordonnee):
         pass
 
-    def decode(self, individu):
+    def decode(self, coordonnee):
         pass
 
 
 class CodageBinaire:
-    def code(self, individu):
-        sign = 0 if individu >= 0 else 1
-        individu = abs(individu)
+    def code(self, coordonnee):
+        sign = 0 if coordonnee >= 0 else 1
+        coordonnee = abs(coordonnee)
 
-        mantisse, exposant = math.frexp(individu)
+        mantisse, exposant = math.frexp(coordonnee)
         exposant -= 1
 
         exposant_bits = exposant + 1023
@@ -27,10 +27,10 @@ class CodageBinaire:
         binary_str = f"{sign}{exposant_bin}{mantisse_bin}"
         return binary_str
 
-    def decode(self, individu):
-        sign = int(individu[0], 2)
-        exposant_bin = individu[1:12]
-        mantisse_bin = individu[12:]
+    def decode(self, coordonnee):
+        sign = int(coordonnee[0], 2)
+        exposant_bin = coordonnee[1:12]
+        mantisse_bin = coordonnee[12:]
 
         exposant = int(exposant_bin, 2) - 1023
         mantisse = 1 + int(mantisse_bin, 2) / (2**52)
@@ -39,3 +39,11 @@ class CodageBinaire:
         if sign == 1:
             value = -value
         return value
+
+
+if __name__ == "__main__":
+    nombre = 1.001
+    codage = CodageBinaire()
+    binary_rep = codage.code(nombre)
+    decoded_value = codage.decode(binary_rep)
+    print(binary_rep, decoded_value)
