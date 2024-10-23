@@ -1,0 +1,29 @@
+Classes 
+- Population : 
+    taille
+    fct initialisation (nb_individu, fenêtre, codage) 
+- Individu
+
+- Fenetre
+    n : taille de la dimension
+    min : valeur minimale selon la dimension
+    max : valeur maximale selon la dimension
+- Coordonnée
+    nom : tableau de taille fenêtre = [x,y,z,...]
+    valeur : tableau de taille fenêtre qui stocke la valeur associée à nom = [a, b, c, ...]
+- Codage
+    code(individu)
+- CodageMatriceExposant
+    code(individu)
+- 
+- Selection
+    prendre_deux(population)
+- 
+
+--------------------------------------------------------------------------------------------------------------------------
+
+On génère une population d'individus de taille constante. On évalue l'ensemble des individus selon la fonction de fitting.
+On sélectionne les individus ayant le meilleur score de fit pour résoudre notre problème. On code ces individus en binaire.
+On croise ces individus et on évalue les nouveaux individus engendrés (On procède à une mutation au préalable). 
+En fonction du score de fit des nouveaux individus engendrés on les remplace ou non dans la population totale. On remplace
+la population de manière totale ou sur un principe d'élitisme.
