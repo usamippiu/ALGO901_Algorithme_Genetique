@@ -1,21 +1,30 @@
 # Importer la classe fenêtre pour initialiser les coordonnées
 # Importer la classe codage
 from Fenetre import Fenetre
-from CodageBinaire import Codage, CodageBinaire
+from CodageBinaire import CodageBinaire
+import random
 
+# liste de fenetres
 class Coordonnee:
-    def __init__(self, valeur, fenetre, typeCodage):
-        self.nom = fenetre.nom  # liste de string par exemple dans R^3 on aurait [x,y,z]
-        self.valeur = valeur    # liste de valeurs correspondantes, par exemple dans R^3 on aurait (2,4,5)
-                                # cette liste contient des valeurs entre le min et le max de la taille de la fenêtre
-        self.typeCodage = typeCodage # savoir dans quelle base
-        self.codeBaseX = self.setCodeBaseX() # avoir la conversion des coordonnées dans la base selectionnée
+    def __init__(self, fenetre, typeCodage, valeur=None):
+        self.nom = fenetre.nom  # nom de la variable
+        if valeur is not None:
+            self.valeur = valeur    # sa valeur
+        self.typeCodage = typeCodage # savoir dans quelle base ie quel objet on a
+        self.codeBaseX = self.set_code_base_X() # avoir la conversion des coordonnées dans la base selectionnée
         
-    def setCodeBaseX(self):
-       return self.typeCodage.code(self.valeur)
+    def set_code_base_X(self):
+       return self.typeCodage.code(self.valeurs)
 
-    def getCodageCoordonnees(self):
+    def get_codage_coordonnee(self):
         return self.codeBaseX()
     
-    def getCoordonnees(self):
+    def get_valeur_coordonnee(self):
         return self.valeur
+    
+    def set_valeur_coordonnee(self, fenetre, valeur=None):
+        # Si aucune valeur n'est fournie, générer une valeur aléatoire entre xmin et xmax
+        if valeur is None:
+            valeur = random.uniform(fenetre.min, fenetre.max)
+        return valeur
+            
