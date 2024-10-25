@@ -1,15 +1,8 @@
 import math
+from Codage import Codage
 
 
-class Codage:
-    def code(self, coordonnee):
-        pass
-
-    def decode(self, coordonnee):
-        pass
-
-
-class CodageBinaire:
+class CodageBinaire(Codage):
     def code(self, coordonnee):
         sign = 0 if coordonnee >= 0 else 1
         coordonnee = abs(coordonnee)
