@@ -12,7 +12,7 @@ class Coordonnee:
         self.codeBaseX = self.setCodeBaseX() # avoir la conversion des coordonnées dans la base selectionnée
         
     def setCodeBaseX(self):
-       return self.codage.code(self.valeurs)
+       return self.typeCodage.code(self.valeur)
 
     def getCodageCoordonnees(self):
         return self.codeBaseX()
