@@ -1,3 +1,6 @@
+from Individu import Individu
+from Coordonnee import Coordonnee
+
 class Population:
     def __init__(self, nombreMax, fonctionPerformance):
         self.individus = []
@@ -8,7 +11,7 @@ class Population:
     def ajouter_individus(self, individus):
         if len(self.individus) + len(individus) <= self.nombreMax: # peut on bien ajouter la liste ? Si oui :
             # on calcule le score des individus et on les ajoute
-            (individu.set_score_performance(self) for individu in individus)
+            [individu.set_score_performance(self) for individu in individus if individu.scorePerformance is None]
             self.individus.extend(individus)
         else:
             print("Population maximale atteinte.")
@@ -32,17 +35,26 @@ class Population:
             print("La population est vide.")
 
     # On va générer une population d'individus aléatoirement
-    def generer_population(self, nombreMax, fenetres):
+    def generer_population(self, nombreMax, fenetres, typeCodage):
         # On a besoin d'une methode qui init un individu et on fait une boucle jusqu'à atteindre nb max, puis on les ajoute
         # on genere des coordonnees aleatoires , on evalue les coordonnees, on les code et on génère l'individu avec
         n=0       
         coordonnees = []
+        
         # On genere ensuite des valeurs de coordonnees
-        # len(fenetres) = dimension_du_travail
-        #while(n < len(fenetres)):
-            #for coordonnee_alea = 
+        while(n < len(fenetres)):         # dimension du travail
+            coordonnee_alea = Coordonnee(fenetres[n], typeCodage)
+            coordonnee_alea.set_valeur_coordonnee()
+            coordonnees.append(coordonnee_alea)
+            n += 1
+
+        n=0
+        individus = []
         # On genere un individu aléatoirement
-       # while(n <= nombreMax):
-            # individu_alea = Individu(coordonnees)
-            # n = nombreMax
-        # A completer
+        while(n <= nombreMax):
+            individu_alea = Individu(coordonnees[n])
+            individu_alea.set_score_performance(self)
+            individus.append(individu_alea)
+            n += 1
+            
+        self.ajouter_individus(individus)
