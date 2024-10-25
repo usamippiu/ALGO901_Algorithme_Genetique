@@ -1,9 +1,12 @@
-# pour le programme
 import random
-from Selection import Selection
-
-# pour faire les tests unitaires
 import math
+
+from Selection import Selection
+from Individu import Individu
+from Coordonnee import Coordonnee
+from Fenetre import Fenetre
+from CodageBinaire import CodageBinaire
+
 
 # Avec cette méthode, chaque valeur d'une fonction occupe une certaine proportion de la roue.
 # Il s'agit de tirer des valeurs (individus) en fonction de la proportion d'occupation de la roue.
@@ -14,9 +17,9 @@ import math
 # Cela permet de choisir suivant des proportions d'occupation de la roue.
 
 class RoueDeLaFortune(Selection):
-    def __init__(self, population, performance):
+    def __init__(self, population):
         super().__init__(population)
-        self.performance = performance
+        #self.performance = performance
 
     def calculeTotalPerformance(self):
 
@@ -31,9 +34,9 @@ class RoueDeLaFortune(Selection):
 
         # Parcours de la population et sélection de l'individu choisi
         perf = 0
-        for individu in self.population:
+        for individu in self.population.individu:
             # calcul de la performance de l'individu (évaluation par la fonction)
-            perf += self.performance(individu)
+            perf += self.population.individu.performance
 
             # comparaison de l'évaluation avec le nombre aléatoire tiré initialement :
             # si sa valeur est supérieure ou égale au nombre, on le retourne
@@ -60,15 +63,22 @@ if __name__=="__main__":
     def g(x):
         return math.sqrt(x)
     
-    x1 = 1
-    x2 = 2
-    x3 = 3
-    x4 = 4
-    x5 = 5
+    fenetreX = Fenetre(-10,10,'x')
+    codage = CodageBinaire()
+    coordonneeX1 = Coordonnee(1, fenetreX, codage)
+    x1 = Individu(coordonneeX1, f)
+    coordonneeX2 = Coordonnee(2, fenetreX, codage)
+    x2 = Individu(coordonneeX2, f)
+    coordonneeX3 = Coordonnee(3, fenetreX, codage)
+    x3 = Individu(coordonneeX3, f)
+    coordonneeX4 = Coordonnee(4, fenetreX, codage)
+    x4 = Individu(coordonneeX4, f)
+    coordonneeX5 = Coordonnee(5, fenetreX, codage)
+    x5 = Individu(coordonneeX5, f)
 
     population = [x1,x2,x3,x4,x5]
 
-    methode = RoueDeLaFortune(population, f)
+    methode = RoueDeLaFortune(population)
     print(methode.calculeTotalPerformance())
 
     print(methode.selectionParents())
