@@ -6,8 +6,10 @@ class Population:
     
     # Ajouter des individus dans la population, prend en parametre une liste d'individus  
     def ajouter_individus(self, individus):
-        if len(self.individus) + len(individus) <= self.nombreMax:
-            self.individus.extend(individus) 
+        if len(self.individus) + len(individus) <= self.nombreMax: # peut on bien ajouter la liste ? Si oui :
+            # on calcule le score des individus et on les ajoute
+            (individu.set_score_performance(self) for individu in individus)
+            self.individus.extend(individus)
         else:
             print("Population maximale atteinte.")
             
@@ -29,11 +31,18 @@ class Population:
         else:
             print("La population est vide.")
 
-    
     # On va générer une population d'individus aléatoirement
-    # où l'individu est un objet comportant des coordonnees dans R^n, leurs valeurs, comprises entre les valeurs de la fenêtre)
-    def generer_population(self, nombreMax):
+    def generer_population(self, nombreMax, fenetres):
         # On a besoin d'une methode qui init un individu et on fait une boucle jusqu'à atteindre nb max, puis on les ajoute
-       # on genere des coordonnees aleatoires , on evalue les coordonnees, on les code et on génère l'individu avec
-        pass
-    
+        # on genere des coordonnees aleatoires , on evalue les coordonnees, on les code et on génère l'individu avec
+        n=0       
+        coordonnees = []
+        # On genere ensuite des valeurs de coordonnees
+        # len(fenetres) = dimension_du_travail
+        #while(n < len(fenetres)):
+            #for coordonnee_alea = 
+        # On genere un individu aléatoirement
+       # while(n <= nombreMax):
+            # individu_alea = Individu(coordonnees)
+            # n = nombreMax
+        # A completer
