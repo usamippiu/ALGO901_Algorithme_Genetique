@@ -1,7 +1,7 @@
 import random
 import math
 
-from Selection import Selection
+from SelectionParents import SelectionParents as Selection
 from Individu import Individu
 from Coordonnee import Coordonnee
 from Fenetre import Fenetre
