@@ -1,0 +1,2 @@
+class Elitisme:
+    pass
