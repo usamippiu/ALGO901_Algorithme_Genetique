@@ -1,14 +1,11 @@
-# Importer la classe coordonnées
 # Importer la classe performance
 # Importer la classe croisement
 from Coordonnee import Coordonnee
 
 class Individu:
-    def __init__(self, coordonnees, performance):
+    def __init__(self, coordonnees):
         self.coordonnees = coordonnees # nom des variables, liste des valeurs, codage en base prédéfinie
-        self.performance = performance # evaluation de la fonction choisie
+        self.scorePerformance = 0 # evaluation de la fonction choisie # l'objet
 
-    # getCodage
-    # getCoords
-    # appeler self.codageBaseX.code(individu) pour remplir cet attribut
-    # code(Individu) -> lit les coordonnees d'un individu et les converti au bon format
+    def set_score_performance(self, population):
+        self.scorePerformance = population.fonctionPerformance.eval(self.coordonnees.valeur)

@@ -1,9 +1,8 @@
-# Importer la classe individu ( si besoin d'accéder à des attributs depuis cette classe )
-        
-class population:
-    def __init__(self, nombreMax):
+class Population:
+    def __init__(self, nombreMax, fonctionPerformance):
         self.individus = []
         self.nombreMax = nombreMax
+        self.fonctionPerformance = fonctionPerformance # Objet = fonction qu'on va utiliser pour évaluer la population
     
     # Ajouter des individus dans la population, prend en parametre une liste d'individus  
     def ajouter_individus(self, individus):
