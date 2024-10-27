@@ -2,9 +2,9 @@ Classe Population
 	But
 		Représente une population d'individus. Contient les individus et leur caractéristiques.
 	Attributs
-		individus 	-> List, contient les individus constituant notre population.
-		effectif 	-> Integer ou None, effectif de la population. Obligatoire pour générer des individus.
-		performance	-> Objet de classe fille de Performance, contient la méthode d'évaluation et de sélection applicable à chaques individus de la population.
+		individus 	-> List			Contient les individus constituant notre population.
+		effectif 	-> Integer ou None 	Effectif de la population. Obligatoire pour générer des individus.
+		performance	-> Performance		Contient la méthode d'évaluation et de sélection applicable à chaques individus de la population.
 	Méthodes
 		__init__()	-> Constructeur, peut prendre en paramètre un effectif. 
 		genese() 	-> Génération aléatoire des individus de taille effectif.
@@ -18,21 +18,20 @@ classe Individu
 	But
 		Représente un individu d'un population.
 	Attributs
-		coordonnees 	-> List[Coordonnee], liste des coordonnées de l'individus. Encodées ou non.
-		score		-> None ou Float, contient le score d'évaluation de l'individu.
-		codage 		-> Objet de classe fille de Codage, contient la méthode de codage et de décodage à appliquer à l'individu
+		coordonnees 	-> List[Coordonnee] 	Liste des coordonnées de l'individus. Encodées ou non.
+		score		-> None ou Float 	Contient le score d'évaluation de l'individu.
+		codage 		-> Codage 		Contient la méthode de codage et de décodage à appliquer à l'individu.
 	Méthodes
 		code() 		-> Appel la méthode d'encodage de la classe contenu dans l'attribut codage.
 		decode() 	-> Appel la méthode de décodage de la classe contenu dans l'attribut codage.
 
 Classe Coordonnee
 	But 
-		Représente une coordonnée d'un individu.
+		Représente une des coordonnées d'un individu.
 	Attributs
-		num_coord	-> Non-zero integer, numéro de la coordonnées
-		valeur		-> Float ou List[Bool], valeur de la coordonnée, codée ou non.
-		individu	-> Individu, l'individu qui possède cette coordonnnée.
-		fenetre 	-> Fenetre, valeur dans lesquels se trouve la valeur de la coordonnée.
+		num_coord	-> Non-zero integer 	Numéro de la coordonnées
+		valeur		-> Float ou List[Bool]  Valeur de la coordonnée, codée ou non.
+		fenetre 	-> Fenetre 		Valeur dans lesquels se trouve la valeur de la coordonnée.
 	Méthodes
 		???
 
@@ -40,8 +39,8 @@ Classe Fenetre
 	But 
 		Représente la fenêtre de valeurs dans laquelle se trouve une coordonnée.
 	Attributs
-		min 		-> Float, borne inférieure des valeurs prisent par la coordonnée.
-		max 		-> Float, borne supérieure des valeurs prisent par la coordonnée.	
+		min 		-> Float 		Borne inférieure des valeurs prisent par la coordonnée.
+		max 		-> Float 		Borne supérieure des valeurs prisent par la coordonnée.	
 	Méthodes
 		???
 
@@ -54,9 +53,9 @@ Classe Codage
 
 Classe Binaire(Codage)
 	But 
-		Contient les méthode de codage et décodage en binaire applicable à un objet Coordonnée.
+		Contient les méthode de codage et décodage en binaire applicable à un objet Coordonnee.
 	Attributs
-		nom 		-> String, référence de la méthode de codage.
+		nom 		-> String 		Référence de la méthode de codage.
 	Méthodes
 		code()		-> Fonction de codage des coordonées des individus, de réel à binaire.
 		decode()	-> Fonction de décodage, de binaire à réel.
@@ -66,7 +65,7 @@ Classe Hexadecimal(Codage)
 		Contient les méthode de codage et décodage en héxadécilal applicable à un objet Coordonnée.
 		
 	Attributs
-		nom 		-> String, référence de la méthode de codage
+		nom 		-> String 		Référence de la méthode de codage
 	Méthodes
 		code()		-> Fonction de codage des coordonées des individus, de réel à héxadécimal.
 		decode()	-> Fonction de décodage, de héxadécimal à réel.	
@@ -98,59 +97,11 @@ Classe ErreurAbsolueMoyenne(Performance)
 	Méthodes
 		???
 		
-QUESTIONS 
-	- Implémentation fonction de mesure d'erreur ? Choix de cette fonction ? 	-> Classe de fonction d'erreur
-	- Génèse au moment de la création de l'objet Population ? 			-> rentrer les caractéristiques et ensuite genèse manuelle
-	- Renommer Fenetre en un nom plus approprié ? 					-> Plan secondaire
-
+		
 IDEES
 	- Faire une évolution des individus juste après la Genèse
 	- Paramètre d'entrée :
 		-> Performance.FonctionErreur(f, epsilon, nb_iter_max) 	: Object de classe fille de performance (fonction erreur)
 		-> ListFenetres 					: List[Fenetre], représente le pavé de Rn sur lequel on génère notre population
 		-> Codage.MethodeCodage					: Objets de classe fille de codage
-	
-	
-	
-TACHES 
-	- Voir classe Selection, Croisement et Mutation
-	- Rajout des classes coordonnées et fenetres 										FAIT
-	- Mettre en place classe Codage et ses classes filles (codage binaire, hexadécimal) 					FAIT
-	- Mettre en place classe Performance et classe filles (MAE, MSE)							FAIT
-	- Rajouter le but de chaques classes 											FAIT
-	
-		BROUILLON TACHES
-			-> Classe codage avec les codages que nous allons utilisé contunue dans les classes filles
-				-> Paramètres :			codage(), decodage()
-			-> Classe Performance dont les classes filles sont les fonctions erreurs
-				-> Paramaètres :		f		-> fonction du problème d'Optimisation
-								epsilon 	-> erreur d'approximation de la solution
-								nb_iter _max 	-> Nombre d'itération max de l'algorithme
-				-> Paramètres classe fille : 	E 		-> Fonction d'erreur
-								nom		-> Référence de la fonction d'erreur				
-			-> Mutation ne suffit pas la population peut quand meme degénér (min local) il faut toruver une autre solution en plus				
-			-> Performance fille attribué à population, score de performance attribué à individu			
-			-> Codage directement sur Coordonées	
-		
-PLAN D'ACTION
-	1. Première version du fichier d'explication des classes
-	2. Première version du diagramme de classe
-	3. Comparer avec le code déjà construit et :
-		(i) 	Créer des questions
-		(ii) 	Créer des tâches
-		(iii) 	Commencer l'adaptation du digramme + doc et commencer struture code			
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+	- Mutation ne suffit pas la population peut quand même dégénérer (min local) il faut toruver une autre solution en plus	(???)				
