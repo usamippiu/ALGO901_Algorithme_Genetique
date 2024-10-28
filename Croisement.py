@@ -2,7 +2,7 @@ import random
 
 
 class Croisement:
-    # En pratique, on aura une liste [individu1.coordonnees.codeBaseX() , ... ]
+    # En pratique, on aura une liste [individu1.coordonnees.codeBaseX() , ... ], Il faudra seulement modifier la mantisse et non pas le bit de signe
     def __init__(self, selected_individuals):
         """
         Initialisation de la classe Croisement avec les individus sélectionnés.
