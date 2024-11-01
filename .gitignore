@@ -1,0 +1,23 @@
+# Ignorer les dossiers de cache Python
+__pycache__/
+*.py[cod]
+
+# Ignorer les dossiers de cache des environnements virtuels
+venv/
+.env/
+.virtualenv/
+
+# Ignorer les fichiers de configuration ou secrets
+*.env
+*.config
+*.secret
+
+# Ignorer les fichiers générés par Jupyter Notebook et IPython
+.ipynb_checkpoints/
+
+# Ignorer les logs et fichiers temporaires
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store

@@ -1,44 +1,107 @@
 Classe Population
-	Attributs :
-		individus -> List, contient les individus constituant notre population.
-		effectif -> Integer, effectif de la population.
-		fenetre -> Fenetre, représente les limites du pavé de Rn dans lequel est généré notre population.
-		f -> Fonction qui correspond au pronblème d'optimisation que notre algorithme essaie de résoudre.
-		e -> Fonction d'erreur d'approximation de la solution.
-		epsilon -> Float, seuil d'erreur s'approximation du problème d'optimisation.
-	Méthodes :
-		code() -> Fonction qui appel la méthode code() sur chaque individus (Voir description de la classe Individu)
-		decode() -> Fonction qui appel la méthode code() sur chaque individus (Voir description de la classe Individu) 
-		rechercheSol() -> Fonction qui évalue chaques individus comme potentielle solution de notre problème 
-		                            d'optimisation f en appelant la méthode evaluation() de chaque individus. Si plusieurs 
-		                            solutions satisfaisantes sont détectées on prend celle dont l'erreur d'approximation est 
-		                            la plus petite.
-		genese() -> Génération aléatoire d'une population d'individu de taille effectif
+	But
+		Représente une population d'individus. Contient les individus et leur caractéristiques.
+	Attributs
+		individus 	-> List			Contient les individus constituant notre population.
+		effectif 	-> Integer ou None 	Effectif de la population. Obligatoire pour générer des individus.
+		performance	-> Performance		Contient la méthode d'évaluation et de sélection applicable à chaques individus de la population.
+	Méthodes
+		__init__()	-> Constructeur, peut prendre en paramètre un effectif. 
+		genese() 	-> Génération aléatoire des individus de taille effectif.
+		code() 		-> Appelle la méthode code() associé à la classe contenue dans l'attribut performance sur chaque individu.
+		decode() 	-> Appelle la méthode decode() associé à la classe contenue dans l'attribut performance sur chaque individu.
+		evaluation()	-> Enclenche le processus d'évaluation des individus. Génère, si ce n'est pas déjà fait, un score pour chacun d'eux.
+		rechercheSol() 	-> Enclenche le processus de recherche de solution dans la population. Contrôle les scores de chaque individu.
+		mutation(p)	-> Opère une mutation sur une proportion p d'individus de la population.
 
 classe Individu
-	Attributs :
-		coordonnees -> Coordonnees, version binaire ou réel.
-		f -> Fonction qui correspond au pronblème d'optimisation que notre algoirithme essaie de résoudre.
-		e -> Fonction d'erreur d'approximation de la solution.
-		epsilon -> Float, seuil d'erreur s'approximation du problème d'optimisation.
-	Méthodes :
-		code() -> Méthode qui encode les coordonnées en binaire.
-		decode() -> Méthode qui décode les coordonnées de binaire à réel.
-		evaluation() -> Méthode qui évalue un individu qualitativement comme solution du probème d'optimisation f.
-		
-		
-QUESTIONS :
-	- Implémentation fonction de mesure d'erreur ? Choix de cette fonction ?
-	- Génèse au moment de la création de l'objet Population ?
-	- Renommer Fenetre en un nom plus approprié ?
+	But
+		Représente un individu d'un population.
+	Attributs
+		coordonnees 	-> List[Coordonnee] 	Liste des coordonnées de l'individus. Encodées ou non.
+		score		-> None ou Float 	Contient le score d'évaluation de l'individu.
+		codage 		-> Codage 		Contient la méthode de codage et de décodage à appliquer à l'individu.
+	Méthodes
+		code() 		-> Appel la méthode d'encodage de la classe contenu dans l'attribut codage.
+		decode() 	-> Appel la méthode de décodage de la classe contenu dans l'attribut codage.
 
-IDEES:
+Classe Coordonnee
+	But 
+		Représente une des coordonnées d'un individu.
+	Attributs
+		num_coord	-> Non-zero integer 	Numéro de la coordonnées
+		valeur		-> Float ou List[Bool]  Valeur de la coordonnée, codée ou non.
+		fenetre 	-> Fenetre 		Valeur dans lesquels se trouve la valeur de la coordonnée.
+	Méthodes
+		???
+
+Classe Fenetre
+	But 
+		Représente la fenêtre de valeurs dans laquelle se trouve une coordonnée.
+	Attributs
+		min 		-> Float 		Borne inférieure des valeurs prisent par la coordonnée.
+		max 		-> Float 		Borne supérieure des valeurs prisent par la coordonnée.	
+	Méthodes
+		???
+
+Classe Codage
+	But
+		Représente un codage appliqué à une coodonnée.
+	Méthodes
+		code()		-> Fonction de codage des coordonées des individus, surchargée dans les classes filles.
+		decode()	-> Fonction de décodage, surchargée dans les classes filles.
+
+Classe Binaire(Codage)
+	But 
+		Contient les méthode de codage et décodage en binaire applicable à un objet Coordonnee.
+	Attributs
+		nom 		-> String 		Référence de la méthode de codage.
+	Méthodes
+		code()		-> Fonction de codage des coordonées des individus, de réel à binaire.
+		decode()	-> Fonction de décodage, de binaire à réel.
+		
+Classe Hexadecimal(Codage)
+	But 
+		Contient les méthode de codage et décodage en héxadécilal applicable à un objet Coordonnée.
+		
+	Attributs
+		nom 		-> String 		Référence de la méthode de codage
+	Méthodes
+		code()		-> Fonction de codage des coordonées des individus, de réel à héxadécimal.
+		decode()	-> Fonction de décodage, de héxadécimal à réel.	
+	
+Classe Performance
+	But 	
+		Classe mère à laquelle sont relié les classes représentant chaque fonction d'erreur (représenté dans les classes filles) que l'on souhaite conscidérer.
+	Attributs
+		f		-> Fonction du problème d'optimisation
+		epsilon		-> Erreur d'approximation de la solution
+		nb_iter_max	-> Nombre maximal de cycle de génération pour évité de faire tourner l'algorithme trop longtemps.
+	Méthodes
+		evaluation() 	-> ???, surcharge dans la classe fille
+
+Classe ErreurMoyenneQuandratique(Performance)
+	But	
+		Classe fille de performance, représente et contient toutes les caractéristiques de l'évaluation d'un individu avec la fonction d'erreur en moyenne quadratique.
+	
+	Attributs
+		MSE 		-> Fonction qui permet de calculer l'erreur en moyenne quadratique
+	Méthodes
+		???
+
+Classe ErreurAbsolueMoyenne(Performance)
+	But
+		Clase fille de performance, représente et contient toutes les caractéristiques de l'évaluation d'un individu avec la fonction en moyenne absolue.
+	Attributs
+		MAE 		-> Fonction qui permer de calculer l'erreur en moyenne absolue
+	Méthodes
+		???
+		
+		
+IDEES
 	- Faire une évolution des individus juste après la Genèse
-	- Paramètres d'entrée : f, e, epsilon, P (Pavé de Rn, la dimension concsidéré serait détuite de la forme de celui-ci)
-
-TACHES : 
-	- Corriger diagramme ULM + notes ULM -> fenetre est pour une seule coordonée !
-	- Implémenter changements notes tableaux, utiliser la méthodes de prise en charge des codages comme des méthodes dans une classe 
-	  fille de Codage, pareil pour les fonction erreur (Voir les photos de tableaux)
-	- Changer les paramètres d'entrée
-	- Extraction des autres idées des photos du tableau
+	- Paramètre d'entrée :
+		-> Performance.FonctionErreur(f, epsilon, nb_iter_max) 	: Object de classe fille de performance (fonction erreur)
+		-> ListFenetres 					: List[Fenetre], représente le pavé de Rn sur lequel on génère notre population
+		-> Codage.MethodeCodage					: Objets de classe fille de codage
+	- Mutation ne suffit pas la population peut quand même dégénérer (min local) il faut toruver une autre solution en plus	(???)				
