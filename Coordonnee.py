@@ -14,7 +14,7 @@ class Coordonnee:
         self.codeBaseX = self.set_code_base_X() # avoir la conversion des coordonnées dans la base selectionnée
         
     def set_code_base_X(self):
-       return self.typeCodage.code(self.valeurs)
+       return self.typeCodage.code(self.valeur)
 
     def get_codage_coordonnee(self):
         return self.codeBaseX()
