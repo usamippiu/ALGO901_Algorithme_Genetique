@@ -1,4 +1,6 @@
 class Codage:
+    """ """
+
     def code(self, coordonnee):
         pass
 
