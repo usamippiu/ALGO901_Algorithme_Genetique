@@ -15,10 +15,20 @@ from F9 import F9
 from Schwefel import Schwefel
 from SixHumpCamelSix import SixHumpCamelSix
 
-# Import libraries
+# Fonctions de selection :
+from RoueDeLaFortune import RoueDeLaFortune
+from Selection import Selection
+
+# Fonction de crossover
+from Croisement import Croisement, CroisementSimple
+# from CroisementSimple import CroisementSimple
+# from Croisement import Croisement
+
+
+# Import PY libraries
 import matplotlib.pyplot as plt
 
-tirageMax = 50
+tirageMax = 1
 # Stockons les individus pour voir si on arrive ou non à améliorer le score 
 individus_min = [ ]
 for i in range(tirageMax):
@@ -29,7 +39,7 @@ for i in range(tirageMax):
     # Nombre de coordonnées d'un individu
     dimension = 2
     # Fonction de mesure pour la performance de notre algorithme :
-    fonctionPerformance = F2("f2") # TODO : Pourquoi donner un nom ?
+    fonctionPerformance = F2("f2")
 
     # Fenêtres pour la génération de la population :
     fenetres  = []
@@ -42,20 +52,22 @@ for i in range(tirageMax):
     precision_exposant = 11
     typeCodage = CodageBinaire((precision_mantisse, precision_exposant))
 
-    # Création de la population :
-    population = Population(nombreMax, fonctionPerformance)
-
     # Générer une population, on a des individus aléatoires avec des coordonnées dans les fenêtres et leurs score de performance en fonction d'une fonction choisie :
+    population = Population(nombreMax, fonctionPerformance)
     population.generer_population(fenetres, typeCodage)
-    # population.afficher_population()
-    # On cherche l'individu qui a le score de performance minimale
+    # On cherche l'individu qui a le score de performance minimale et on le stock
     individu_min = population.lf_individu_minimal()
     individus_min.append(individu_min)
+    
+    # Choix de la selection
+    selection = RoueDeLaFortune(population)
+    parents1, parents2 = selection.selection_parents()
+    # Crossover
 
 scores = [individu.scorePerformance for individu in individus_min]
 
-# On regarde la convergence
-indices = list(range(tirageMax))
+# Affichage pour la convergence de l'algo
+''' indices = list(range(tirageMax))
 
 plt.plot(indices, scores, marker='o', linestyle='-', color='b', label='Valeurs')
 plt.title("Score minimal en fonction des tirages")
@@ -64,7 +76,7 @@ plt.xlim(0,tirageMax)
 plt.ylabel("Score minimal")
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.legend()
-plt.show()
+plt.show() '''
 
 # PSEUDO CODE
 # TANT QUE nb_iter max > 0:
