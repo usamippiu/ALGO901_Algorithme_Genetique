@@ -61,7 +61,7 @@ class CroisementSimple(Croisement):
         enfant1 = ind1[:point_de_coupe] + ind2[point_de_coupe:]
         enfant2 = ind2[:point_de_coupe] + ind1[point_de_coupe:]
 
-        return [enfant1, enfant2]
+        return [enfant1, enfant2], point_de_coupe
 
 
 class CroisementDouble(Croisement):
@@ -108,23 +108,24 @@ class CroisementDouble(Croisement):
         enfant1 = segment1_ind1 + segment2_ind2 + segment3_ind1
         enfant2 = segment1_ind2 + segment2_ind1 + segment3_ind2
 
-        return [enfant1, enfant2]
+        return [enfant1, enfant2], point1, point2
 
 
 # Petit test
 if __name__ == "__main__":
     individus = ["1010011", "1110010"]
     croisement = CroisementSimple(individus)
-    enfants1 = croisement.perform_crossover(points_de_coupe=1)
+    enfants1, point1 = croisement.perform_crossover(points_de_coupe=1)
     croisement = CroisementDouble(individus)
-    enfants2 = croisement.perform_crossover(points_de_coupe=2)
+    enfants2, point2, point3 = croisement.perform_crossover(points_de_coupe=2)
 
-    print("Enfants engendrés par la découpe à un point :")
+    print(f"Parent 1 : {individus[0]} \nParent 2 : {individus[1]}")
+    print(f"\nDécoupe à la position {point1} :")
 
-    for enfant in enfants1:
-        print(enfant)
+    for enfant, i in zip(enfants1, range(len(enfants1))):
+        print(f"Enfant {i + 1} : {enfant}")
 
-    print("\nEnfants engendrés par la découpe à deux points :")
+    print(f"\nDécoupe aux positions {point2} et {point3}:")
 
-    for enfant in enfants2:
-        print(enfant)
+    for enfant, i in zip(enfants2, range(len(enfants2))):
+        print(f"Enfant {i + 1} : {enfant}")
