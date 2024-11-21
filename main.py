@@ -63,12 +63,14 @@ population.afficher_population()
 # SELECTION ############################################################################################################
 
 #   population_copie <- population.copy()
-#   couple <- []
+#   couples <- []
 #   RF <- RoudeDeLaFortune(population)
 #   TANT QUE taille de la copie > 1:
-#       couple.append(RF.selection_parents())
+#       [parent1, parent2] <- RF.selection_parents()
+#       population_copie.supprimer_individus([parent1, parent2])
+#       couples.append([parent1, parent2])
 
-
+# CROISEMENT ###########################################################################################################
 
 
 
