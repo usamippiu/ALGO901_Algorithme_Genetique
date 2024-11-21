@@ -90,7 +90,7 @@ if __name__=="__main__":
     coordonneeX2 = Coordonnee(fenetreX, codage, 2)
     x2 = Individu([coordonneeX2])
     #x2.scorePerformance = f.eval(2)
-    coordonneeX3 = Coordonnee(fenetreX, codage, 3)
+    coordonneeX3 = Coordonnee(fenetreX, codage, 10)
     x3 = Individu([coordonneeX3])
 
     # initialisation de la population
@@ -112,14 +112,10 @@ if __name__=="__main__":
 
     # initialisation de la population
     population1 = Population(3, f)
-    print(len(population1.individus))
-    print(population1.individus[0])
-    for i in population1.individus:
-        print(len(population1.individus))
-        print(i[0].valeur)
-    print(len(population1.individus))
+
     # ajout des individus dans la population
     population1.ajouter_individus([x11,x21,x31])
+    print(len(population1.individus))
 
     # population_fusionnée
     population_fusion = Population(population.nombreMax, population.fonctionPerformance, population.individus + population1.individus)
@@ -135,4 +131,4 @@ if __name__=="__main__":
 
     methode1 = RoueDeLaFortune(population_fusion)
     nouvelle_population = methode1.selection_n_individus()
-    print([parent[0].coordonnees[0].valeur for parent in nouvelle_population.individus])
+    print([parent.coordonnees[0].valeur for parent in nouvelle_population.individus])
