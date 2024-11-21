@@ -8,4 +8,4 @@ class Individu:
         self.scorePerformance = None # evaluation de la fonction choisie # l'objet
 
     def set_score_performance(self, population):
-        self.scorePerformance = population.fonctionPerformance.eval(self.coordonnees.valeur)
+        self.scorePerformance = population.fonctionPerformance.eval([coord.valeur for coord in self.coordonnees])
