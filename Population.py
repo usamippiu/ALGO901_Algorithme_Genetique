@@ -30,31 +30,29 @@ class Population:
             print("Il y a", self.nombreMax, "individus dans la population.")
             print("Ce sont les suivants:")
             for individu in self.individus:
-                print(individu)
+                print()
+                print("Coordonnées de l'individu:" , [coord.valeur for coord in individu.coordonnees])
+                print("Score de l'individu:" ,individu.scorePerformance )
+
         else:
             print("La population est vide.")
 
     # On va générer une population d'individus aléatoirement
     def generer_population(self, fenetres, typeCodage):
         # On a besoin d'une methode qui init un individu et on fait une boucle jusqu'à atteindre nb max, puis on les ajoute
-        # on genere des coordonnees aleatoires , on evalue les coordonnees, on les code et on génère l'individu avec
-        n=0       
-        coordonnees = []
+        # on genere des coordonnees aleatoires , on evalue les coordonnees, on les code et on génère l'individu avec  
         
-        # On genere ensuite des valeurs de coordonnees
-        while(n < len(fenetres)):         # dimension du travail
-            coordonnee_alea = Coordonnee(fenetres[n], typeCodage)
-            coordonnee_alea.set_valeur_coordonnee()
-            coordonnees.append(coordonnee_alea)
-            n += 1
-
-        n=0
-        individus = []
-        # On genere un individu aléatoirement
-        while(n <= self.nombreMax):
-            individu_alea = Individu(coordonnees[n])
-            individu_alea.set_score_performance(self)
-            individus.append(individu_alea)
-            n += 1
+        for n in range(self.nombreMax):
             
-        self.ajouter_individus(individus)
+            coordonnees = []
+            # On genere ensuite des valeurs de coordonnees # On a n fenetres donc n coordonnées, on a besoin de les associer à un individu
+            for i in range(len(fenetres)):         # dimension du travail
+                coordonnee_alea = Coordonnee(fenetres[i], typeCodage)
+                # coordonnee_alea.set_valeur_coordonnee(fenetres[i])
+                coordonnees.append(coordonnee_alea)
+                
+            # On genere un individu aléatoirement
+            individu_alea = Individu(coordonnees)
+            individu_alea.set_score_performance(self)
+            self.individus.append(individu_alea)
+
