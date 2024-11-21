@@ -21,7 +21,6 @@ from SixHumpCamelSix import SixHumpCamelSix
 nombreMax = 100
 # Nombre de coordonnées d'un individu
 dimension = 2
-
 # Fonction de mesure pour la performance de notre algorithme :
 fonctionPerformance = F2("f2") # TODO : Pourquoi donner un nom ?
 
