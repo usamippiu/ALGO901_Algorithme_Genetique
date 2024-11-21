@@ -19,15 +19,17 @@ from SixHumpCamelSix import SixHumpCamelSix
 
 # Nombre maximum d'individus que l'on souhaite avoir dans notre population :
 nombreMax = 100
+# Nombre de coordonnées d'un individu
+dimension = 2
 
 # Fonction de mesure pour la performance de notre algorithme :
 fonctionPerformance = F2("f2") # TODO : Pourquoi donner un nom ?
 
 # Fenêtres pour la génération de la population :
 # TODO : Construire autant de fenêtres semble laborieux dans les cas où ce n'est pas les mêmes intervalles.
-fenetres  = list()
-for i in range(nombreMax):
-    fenetres.append(Fenetre(0,1))
+fenetres  = []
+for i in range(dimension):
+    fenetres.append(Fenetre(0,1,f"x{i}"))
 
 # Type de codage pour les coordonnées de chaque futur individus :
 # TODO : Mettre precision_mantisse et precision_exposant en paramètres séparés du constructeur comme cela on voit qui correspond à quoi.
@@ -39,7 +41,8 @@ typeCodage = CodageBinaire((precision_mantisse, precision_exposant))
 population = Population(nombreMax, fonctionPerformance)
 
 # Générer une population :
-population.generer_population(nombreMax, fenetres, typeCodage) # TODO : Pourquoi mettre nombreMax en paramètre alors qu'il existe en attribut ?
+population.generer_population(fenetres, typeCodage)
+population.afficher_population()
 
 # EVALUATION ###########################################################################################################
 
