@@ -73,12 +73,12 @@ nb_iter = 0
 while nb_iter < nb_iter_max:
     for individu in population.individus:
         continue
-#       Si le score d'un individu est supérieur à un score seuil (donnée par la précision souhaité):
-#       On renvoie l'individu comme solution
-#       On arrête l'algorithme.
-#
+    #       Si le score d'un individu est supérieur à un score seuil (donnée par la précision souhaité):
+    #       On renvoie l'individu comme solution
+    #       On arrête l'algorithme.
+    #
 
-# SELECTION ############################################################################################################
+    # SELECTION ############################################################################################################
     population_copy = population.copy()
     couples = []
     RF = RoueDeLaFortune(population)
@@ -87,7 +87,7 @@ while nb_iter < nb_iter_max:
         population_copy.supprimer_individus([parent1, parent2])
         couples.append([parent1, parent2])
 
-# CROISEMENT ###########################################################################################################
+    # CROISEMENT ###########################################################################################################
     enfants = []
     for couple in couples:
         croisement = CroisementSimple(couple)
@@ -95,10 +95,9 @@ while nb_iter < nb_iter_max:
         [enfant1, enfant2], _, _ = croisement.perform_crossover()
         enfants += [enfant1, enfant2]
 
-# MUTATION #############################################################################################################
-    nouv_gen = SelectionNouvelleGeneration(population, enfant, mutation=None) # todo : mutation ???
+    # MUTATION #############################################################################################################
+    nouv_gen = SelectionNouvelleGeneration(population, enfant, mutation=None)  # todo : mutation ???
     enfants_selct = nouv_gen.selection_nouvelle_generation()
     population.ajouter_individus(enfants_selct)
     # todo : supprimer le surplus de la population dont le score est le plus bas.
-    nb_iter += 1
-# Si le nombre max d'itérations est atteint, on renvoie l'individu avec le score le plus élevé.
+    nb_iter += 1  # Si le nombre max d'itérations est atteint, on renvoie l'individu avec le score le plus élevé.
