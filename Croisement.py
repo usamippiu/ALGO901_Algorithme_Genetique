@@ -1,9 +1,11 @@
 import random
+from Individu import Individu
 from CodageBinaire import CodageBinaire
 
 
 class Croisement:
     # En pratique, on aura une liste [individu1.coordonnees.codeBaseX() , ... ], Il faudra seulement modifier la mantisse et non pas le bit de signe
+    # On veut prendre des individus en argument
     def __init__(self, selected_individuals):
         """
         Initialisation de la classe Croisement avec les individus sélectionnés.
@@ -127,13 +129,19 @@ if __name__ == "__main__":
     croisement = CroisementDouble(individus)
     enfants2, point2, point3 = croisement.perform_crossover(points_de_coupe=2)
 
-    print(f"Parent 1 : {binary_parent1} \nParent 2 : {binary_parent2}")
+    print(
+        f"Parent 1 (binaire): {binary_parent1} / (non-binaire): {parent1}\nParent 2 (binaire): {binary_parent2} / (non-binaire): {parent2}"
+    )
     print(f"\nDécoupe à la position {point1} :")
 
     for enfant, i in zip(enfants1, range(len(enfants1))):
-        print(f"Enfant {i + 1} : {enfant}")
+        print(
+            f"Enfant {i + 1} (binaire): {enfant} / (non-binaire) {codage.decode(enfant)}"
+        )
 
     print(f"\nDécoupe aux positions {point2} et {point3}:")
 
     for enfant, i in zip(enfants2, range(len(enfants2))):
-        print(f"Enfant {i + 1} : {enfant}")
+        print(
+            f"Enfant {i + 1} (binaire): {enfant} / (non-binaire) {codage.decode(enfant)}"
+        )
