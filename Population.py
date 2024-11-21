@@ -35,7 +35,7 @@ class Population:
             print("La population est vide.")
 
     # On va générer une population d'individus aléatoirement
-    def generer_population(self, nombreMax, fenetres, typeCodage):
+    def generer_population(self, fenetres, typeCodage):
         # On a besoin d'une methode qui init un individu et on fait une boucle jusqu'à atteindre nb max, puis on les ajoute
         # on genere des coordonnees aleatoires , on evalue les coordonnees, on les code et on génère l'individu avec
         n=0       
@@ -51,7 +51,7 @@ class Population:
         n=0
         individus = []
         # On genere un individu aléatoirement
-        while(n <= nombreMax):
+        while(n <= self.nombreMax):
             individu_alea = Individu(coordonnees[n])
             individu_alea.set_score_performance(self)
             individus.append(individu_alea)
