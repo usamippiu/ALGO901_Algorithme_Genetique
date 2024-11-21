@@ -2,8 +2,11 @@ from Individu import Individu
 from Coordonnee import Coordonnee
 
 class Population:
-    def __init__(self, nombreMax, fonctionPerformance):
-        self.individus = []
+    def __init__(self, nombreMax, fonctionPerformance, individus = None):
+        if individus is None :
+            self.individus = []
+        else:
+            self.individus = individus
         self.nombreMax = nombreMax
         self.fonctionPerformance = fonctionPerformance # Objet = fonction qu'on va utiliser pour évaluer la population
     
