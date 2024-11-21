@@ -1,10 +1,13 @@
 # IMPORTATION DES CLASSES ##############################################################################################
+from Croisement import *
 from Population import Population
 from Performance import Performance
 from Fenetre import Fenetre
 from Codage import Codage
 from CodageBinaire import CodageBinaire
 from Selection import Selection
+from RoueDeLaFortune import RoueDeLaFortune
+from SelectionNouvelleGeneration import SelectionNouvelleGeneration
 
 # Fonctions de performance :
 from F2 import F2
@@ -15,20 +18,34 @@ from F9 import F9
 from Schwefel import Schwefel
 from SixHumpCamelSix import SixHumpCamelSix
 
+
 # GENESE ###############################################################################################################
+
+# Fonction a optimiser :
+def f(x):
+    return 0
+
+
+# Nombre d'itérations max :
+nb_iter_max = 10 ** 5
+
+# Erreur d'approx de la solution:
+epsilon = 10 ** (-12)
 
 # Nombre maximum d'individus que l'on souhaite avoir dans notre population :
 nombreMax = 100
+
 # Nombre de coordonnées d'un individu
 dimension = 2
+
 # Fonction de mesure pour la performance de notre algorithme :
-fonctionPerformance = F2("f2") # TODO : Pourquoi donner un nom ?
+fonctionPerformance = F2("f2")  # TODO : Pourquoi donner un nom ?
 
 # Fenêtres pour la génération de la population :
 # TODO : Construire autant de fenêtres semble laborieux dans les cas où ce n'est pas les mêmes intervalles.
-fenetres  = []
+fenetres = []
 for i in range(dimension):
-    fenetres.append(Fenetre(0,1,f"x{i}"))
+    fenetres.append(Fenetre(0, 1, f"x{i}"))
 
 # Type de codage pour les coordonnées de chaque futur individus :
 # TODO : Mettre precision_mantisse et precision_exposant en paramètres séparés du constructeur comme cela on voit qui correspond à quoi.
@@ -43,45 +60,45 @@ population = Population(nombreMax, fonctionPerformance)
 population.generer_population(fenetres, typeCodage)
 population.afficher_population()
 
-
 # QUESTIONS #
-#   Précision de l'évaluation ? Utilisation pour déterminer le score de performance ?
-#   Nombre d'itérations max ? -> nombre d'individus maximum par population ?
-#   Comment sont déterminées les dimensions des individus ?
-#   Où mettre la fonction du problème d'optimisation ?
-#   Nb max iteration début du main ?
+
+# Comment le score pour chaque individu est déterminé ? Précision de l'évaluation ?
+# Quand réduire la population ? À Evaluation ou mutation ?
+
 
 # PSEUDO CODE #
 
 # EVALUATION ###########################################################################################################
-
-# TANT QUE nb_iter_max > nb_iter:
-#       POUR chaque individu dans la population :
-#           Si le score d'un individu est supérieur à un score seuil (donnée par la précision souhaité):
-#               On renvoie l'individu comme solution
-#               On arrête l'algorithme.
+nb_iter = 0
+while nb_iter < nb_iter_max:
+    for individu in population.individus:
+        continue
+#       Si le score d'un individu est supérieur à un score seuil (donnée par la précision souhaité):
+#       On renvoie l'individu comme solution
+#       On arrête l'algorithme.
+#
 
 # SELECTION ############################################################################################################
-
-#       population_copie <- population.copy()
-#       couples <- []
-#       RF <- RoudeDeLaFortune(population)
-#       TANT QUE taille de la copie > 1:
-#           [parent1, parent2] <- RF.selection_parents()
-#           population_copie.supprimer_individus([parent1, parent2])
-#           couples.append([parent1, parent2])
+    population_copy = population.copy()
+    couples = []
+    RF = RoueDeLaFortune(population)
+    while len(population_copy) > 1:
+        [parent1, parent2] = RF.selection_parents()
+        population_copy.supprimer_individus([parent1, parent2])
+        couples.append([parent1, parent2])
 
 # CROISEMENT ###########################################################################################################
-#       enfants <- []
-#       POUR couple DANS couples
-#           croisement <- CroisementSimple(couple)
-#           croisement.validate_individuals()
-#           [enfant1, enfant2], point_de_coupe <- croisement.perform_crossover()
-#           enfants <- enfants + [enfant1,enfant2]
+    enfants = []
+    for couple in couples:
+        croisement = CroisementSimple(couple)
+        croisement.validate_individuals()
+        [enfant1, enfant2], _, _ = croisement.perform_crossover()
+        enfants += [enfant1, enfant2]
 
 # MUTATION #############################################################################################################
-#       nouv_gen <- SelectionNouvelleGeneration(population, enfant, mutation)
-#       enfants_selct <- nouv_gen.selection_nouvelle_generation()
-#       population.ajouter_individus(enfants_selct)
-#       nb_iter <- nb_iter + 1
+    nouv_gen = SelectionNouvelleGeneration(population, enfant, mutation=None) # todo : mutation ???
+    enfants_selct = nouv_gen.selection_nouvelle_generation()
+    population.ajouter_individus(enfants_selct)
+    # todo : supprimer le surplus de la population dont le score est le plus bas.
+    nb_iter += 1
 # Si le nombre max d'itérations est atteint, on renvoie l'individu avec le score le plus élevé.
