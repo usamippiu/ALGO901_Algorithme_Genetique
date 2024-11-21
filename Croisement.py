@@ -1,4 +1,5 @@
 import random
+from CodageBinaire import CodageBinaire
 
 
 class Croisement:
@@ -113,13 +114,20 @@ class CroisementDouble(Croisement):
 
 # Petit test
 if __name__ == "__main__":
-    individus = ["1010011", "1110010"]
+    parent1 = 1.05
+    parent2 = 2.86
+    codage = CodageBinaire([23, 8])
+
+    binary_parent1 = codage.code(parent1)
+    binary_parent2 = codage.code(parent2)
+
+    individus = [binary_parent1, binary_parent2]
     croisement = CroisementSimple(individus)
     enfants1, point1 = croisement.perform_crossover(points_de_coupe=1)
     croisement = CroisementDouble(individus)
     enfants2, point2, point3 = croisement.perform_crossover(points_de_coupe=2)
 
-    print(f"Parent 1 : {individus[0]} \nParent 2 : {individus[1]}")
+    print(f"Parent 1 : {binary_parent1} \nParent 2 : {binary_parent2}")
     print(f"\nDécoupe à la position {point1} :")
 
     for enfant, i in zip(enfants1, range(len(enfants1))):
