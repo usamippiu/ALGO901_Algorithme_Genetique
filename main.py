@@ -46,13 +46,28 @@ population.afficher_population()
 
 # EVALUATION ###########################################################################################################
 
+
+
 # Précision de l'évaluation ?
 # Nombre d'itérations max ? -> nombre d'individus maximum par population ?
 # Comment est determine les dimensions des individus ?
 
+
+# PSEUDO CODE
+# TANT QUE nb_iter max > 0:
+#   POUR chaque individu dans la population :
+#       Si le score d'un individu est supérieur à un score seuil (donnée par la précision souhaité):
+#           On renvoie l'individu comme solution
+#           On arrête l'algorithme
+
 # SELECTION ############################################################################################################
 
-# TODO : qui hérite de Selection ?
+#   population_copie <- population.copy()
+#   couple <- []
+#   RF <- RoudeDeLaFortune(population)
+#   TANT QUE taille de la copie > 1:
+#       couple.append(RF.selection_parents())
+
 
 
 
