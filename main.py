@@ -43,40 +43,45 @@ population = Population(nombreMax, fonctionPerformance)
 population.generer_population(fenetres, typeCodage)
 population.afficher_population()
 
+
+# QUESTIONS #
+#   Précision de l'évaluation ? Utilisation pour déterminer le score de performance ?
+#   Nombre d'itérations max ? -> nombre d'individus maximum par population ?
+#   Comment sont déterminées les dimensions des individus ?
+#   Où mettre la fonction du problème d'optimisation ?
+#   Nb max iteration début du main ?
+
+# PSEUDO CODE #
+
 # EVALUATION ###########################################################################################################
 
-
-
-# Précision de l'évaluation ?
-# Nombre d'itérations max ? -> nombre d'individus maximum par population ?
-# Comment est determine les dimensions des individus ?
-
-
-# PSEUDO CODE
-
-
-# TANT QUE nb_iter max > 0:
-#   POUR chaque individu dans la population :
-#       Si le score d'un individu est supérieur à un score seuil (donnée par la précision souhaité):
-#           On renvoie l'individu comme solution
-#           On arrête l'algorithme
+# TANT QUE nb_iter_max > nb_iter:
+#       POUR chaque individu dans la population :
+#           Si le score d'un individu est supérieur à un score seuil (donnée par la précision souhaité):
+#               On renvoie l'individu comme solution
+#               On arrête l'algorithme.
 
 # SELECTION ############################################################################################################
 
-#   population_copie <- population.copy()
-#   couples <- []
-#   RF <- RoudeDeLaFortune(population)
-#   TANT QUE taille de la copie > 1:
-#       [parent1, parent2] <- RF.selection_parents()
-#       population_copie.supprimer_individus([parent1, parent2])
-#       couples.append([parent1, parent2])
+#       population_copie <- population.copy()
+#       couples <- []
+#       RF <- RoudeDeLaFortune(population)
+#       TANT QUE taille de la copie > 1:
+#           [parent1, parent2] <- RF.selection_parents()
+#           population_copie.supprimer_individus([parent1, parent2])
+#           couples.append([parent1, parent2])
 
 # CROISEMENT ###########################################################################################################
-#
-#   POUR couple DANS couples
-#       croisement <- CroisementSimple(couple)
-#       croisement.validate_individuals()
-#       [enfant1, enfant2], point_de_coupe <- croisement.perform_crossover()
-#       population.ajouter_individus([enfant1, enfant2])
+#       enfants <- []
+#       POUR couple DANS couples
+#           croisement <- CroisementSimple(couple)
+#           croisement.validate_individuals()
+#           [enfant1, enfant2], point_de_coupe <- croisement.perform_crossover()
+#           enfants <- enfants + [enfant1,enfant2]
 
 # MUTATION #############################################################################################################
+#       nouv_gen <- SelectionNouvelleGeneration(population, enfant, mutation)
+#       enfants_selct <- nouv_gen.selection_nouvelle_generation()
+#       population.ajouter_individus(enfants_selct)
+#       nb_iter <- nb_iter + 1
+# Si le nombre max d'itérations est atteint, on renvoie l'individu avec le score le plus élevé.
