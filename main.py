@@ -61,6 +61,8 @@ population = Population(nombreMax, fonctionPerformance)
 # Générer une population :
 population.generer_population(fenetres, typeCodage)
 population.afficher_population()
+individu_min = population.lf_individu_minimal()
+
 
 # QUESTIONS #
 

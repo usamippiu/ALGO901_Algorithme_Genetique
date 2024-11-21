@@ -2,8 +2,11 @@ from Individu import Individu
 from Coordonnee import Coordonnee
 
 class Population:
-    def __init__(self, nombreMax, fonctionPerformance):
-        self.individus = []
+    def __init__(self, nombreMax, fonctionPerformance, individus = None):
+        if individus is None :
+            self.individus = []
+        else:
+            self.individus = individus
         self.nombreMax = nombreMax
         self.fonctionPerformance = fonctionPerformance # Objet = fonction qu'on va utiliser pour évaluer la population
     
@@ -56,3 +59,11 @@ class Population:
             individu_alea.set_score_performance(self)
             self.individus.append(individu_alea)
 
+    def lf_individu_minimal(self):
+        if not self.individus:
+            return None
+        
+        # Utiliser la fonction min avec une clé pour comparer les scores
+        individu_min = min(self.individus, key=lambda individu: individu.scorePerformance)
+        
+        return individu_min
