@@ -54,6 +54,8 @@ population.afficher_population()
 
 
 # PSEUDO CODE
+
+
 # TANT QUE nb_iter max > 0:
 #   POUR chaque individu dans la population :
 #       Si le score d'un individu est supérieur à un score seuil (donnée par la précision souhaité):
@@ -71,6 +73,11 @@ population.afficher_population()
 #       couples.append([parent1, parent2])
 
 # CROISEMENT ###########################################################################################################
+#
+#   POUR couple DANS couples
+#       croisement <- CroisementSimple(couple)
+#       croisement.validate_individuals()
+#       [enfant1, enfant2], point_de_coupe <- croisement.perform_crossover()
+#       population.ajouter_individus([enfant1, enfant2])
 
-
-
+# MUTATION #############################################################################################################
