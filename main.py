@@ -21,10 +21,12 @@ from SixHumpCamelSix import SixHumpCamelSix
 
 # GENESE ###############################################################################################################
 
+# Mode bencmark de l'algorithme :
+benchmark = False
+
 # Fonction a optimiser :
 def f(x):
     return 0
-
 
 # Nombre d'itérations max :
 nb_iter_max = 10 ** 5
@@ -39,7 +41,7 @@ nombreMax = 100
 dimension = 2
 
 # Fonction de mesure pour la performance de notre algorithme :
-fonctionPerformance = F2("f2")  # TODO : Pourquoi donner un nom ?
+fonctionPerformance = F2("f2")
 
 # Fenêtres pour la génération de la population :
 # TODO : Construire autant de fenêtres semble laborieux dans les cas où ce n'est pas les mêmes intervalles.
@@ -69,18 +71,34 @@ population.afficher_population()
 # PSEUDO CODE #
 
 # EVALUATION ###########################################################################################################
-nb_iter = 0
-while nb_iter < nb_iter_max:
-    for individu in population.individus:
-        continue
-    #       Si le score d'un individu est supérieur à un score seuil (donnée par la précision souhaité):
-    #       On renvoie l'individu comme solution
-    #       On arrête l'algorithme.
-    #
 
-    # SELECTION ############################################################################################################
+# Initialisation du nombre d'itérations :
+nb_iter = 0
+
+# Tant que le nombre d'itérations max n'est pas atteint :
+while nb_iter < nb_iter_max:
+    # On sélectionne le meilleur individus. Dépend de si nous sommes en mode benchmark ou non.
+    # todo : Créer un attribut meilleur_individu, soit dans la classe Population, soit dans une future classe AlgoGenetique.
+    if benchmark:
+        continue
+        # On prend l'individu avec le meilleur score de performance sur la fonction de benchmark.
+        # todo : écrire méthode dans Population qui renvoie l'individu avec le meilleur score de performance.
+    else:
+        continue
+        # On sélectionne l'individu qui minimise le mieux la fonction à optimiser
+        # todo : méthode dans population qui renvoie l'individu qui minimise le mieux notre fonction d'optimisation.
+
+# SELECTION ############################################################################################################
+    # On sélectionne les parents sur une copie de la population.
+    # On arrête une fois qu'aucuns couple ne peut être formé :
+
+    # Population de sélection des couples :
     population_copy = population.copy()
+
+    # Liste des couples :
     couples = []
+
+    # Initialisation de la méthode de sélection : todo : Préciser la méthode pendant la génèse.
     RF = RoueDeLaFortune(population)
     while len(population_copy) > 1:
         [parent1, parent2] = RF.selection_parents()
@@ -93,10 +111,16 @@ while nb_iter < nb_iter_max:
         croisement = CroisementSimple(couple)
         croisement.validate_individuals()
         [enfant1, enfant2], _, _ = croisement.perform_crossover()
+        # Remplacement aléatoire enfants/parents
+        #       -> On supprime les 2 individus non-sélectionner parmis le quatuor parent/enfant.
+        #       -> La sélection se fait avec la classe SélectionNouvelleGénération
+        # On remplace dans la population
+        # todo : la mutation a lieu pendant le croisement avec les parents
+        # todo : sélection de la nouvelle génération devrait aléatoirement choisir deux individus parmis 4 : parent1, parent2, enfant1, enfant2
         enfants += [enfant1, enfant2]
 
     # MUTATION #############################################################################################################
-    nouv_gen = SelectionNouvelleGeneration(population, enfant, mutation=None)  # todo : mutation ???
+    nouv_gen = SelectionNouvelleGeneration(population, enfants, mutation=None)  # todo : mutation ???
     enfants_selct = nouv_gen.selection_nouvelle_generation()
     population.ajouter_individus(enfants_selct)
     # todo : supprimer le surplus de la population dont le score est le plus bas.
