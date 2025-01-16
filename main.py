@@ -24,12 +24,14 @@ from SixHumpCamelSix import SixHumpCamelSix
 # Mode bencmark de l'algorithme :
 benchmark = False
 
+
 # Fonction a optimiser :
 def f(x):
     return 0
 
+
 # Nombre d'itérations max :
-nb_iter_max = 10 ** 5
+nb_iter_max = 10**5
 
 # Erreur d'approx de la solution:
 epsilon = 10 ** (-12)
@@ -82,15 +84,15 @@ while nb_iter < nb_iter_max:
     # On sélectionne le meilleur individus. Dépend de si nous sommes en mode benchmark ou non.
     # todo : Créer un attribut meilleur_individu, soit dans la classe Population, soit dans une future classe AlgoGenetique.
     if benchmark:
-        continue
+        pass
         # On prend l'individu avec le meilleur score de performance sur la fonction de benchmark.
         # todo : écrire méthode dans Population qui renvoie l'individu avec le meilleur score de performance.
     else:
-        continue
+        pass
         # On sélectionne l'individu qui minimise le mieux la fonction à optimiser
         # todo : méthode dans population qui renvoie l'individu qui minimise le mieux notre fonction d'optimisation.
 
-# SELECTION ############################################################################################################
+    # SELECTION ############################################################################################################
     # On sélectionne les parents sur une copie de la population.
     # On arrête une fois qu'aucuns couple ne peut être formé :
 
@@ -122,7 +124,9 @@ while nb_iter < nb_iter_max:
         enfants += [enfant1, enfant2]
 
     # MUTATION #############################################################################################################
-    nouv_gen = SelectionNouvelleGeneration(population, enfants, mutation=None)  # todo : mutation ???
+    nouv_gen = SelectionNouvelleGeneration(
+        population, enfants, mutation=None
+    )  # todo : mutation ???
     enfants_selct = nouv_gen.selection_nouvelle_generation()
     population.ajouter_individus(enfants_selct)
     # todo : supprimer le surplus de la population dont le score est le plus bas.
