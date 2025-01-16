@@ -1,31 +1,22 @@
 import random
 from Individu import Individu
-from CodageBinaire import CodageBinaire
+from Fenetre import Fenetre
+from Coordonnee import Coordonnee
 
 
 class Croisement:
-    # En pratique, on aura une liste [individu1.coordonnees.codeBaseX() , ... ], Il faudra seulement modifier la mantisse et non pas le bit de signe
-    # On veut prendre des individus en argument
-    def __init__(self, selected_individuals):
+    def __init__(self):
         """
-        Initialisation de la classe Croisement avec les individus sélectionnés.
+        Classe de base pour le croisement.
+        """
+        pass
 
-        :param selected_individuals: Liste de chaînes binaires représentant les individus sélectionnés.
-        """
-        self.selected_individuals = selected_individuals
-
-    def validate_individuals(self):
-        """
-        Valide que tous les individus ont la même longueur.
-        """
-        length = len(self.selected_individuals[0])
-        for ind in self.selected_individuals:
-            if len(ind) != length:
-                raise ValueError("Tous les individus doivent avoir la même longueur.")
-
-    def perform_crossover(self):
+    def perform_crossover(self, ind1, ind2):
         """
         Méthode à implémenter dans les classes dérivées pour effectuer le croisement.
+
+        :param ind1: Premier individu (objet Individu).
+        :param ind2: Deuxième individu (objet Individu).
         """
         raise NotImplementedError(
             "Cette méthode doit être implémentée par les sous-classes."
@@ -33,115 +24,118 @@ class Croisement:
 
 
 class CroisementSimple(Croisement):
-    def __init__(self, selected_individuals):
-        super().__init__(selected_individuals)
+    def __init__(self):
+        super().__init__()
 
-    def perform_crossover(self, points_de_coupe=1):
+    def perform_crossover(self, ind1, ind2):
         """
-        Effectue le croisement entre deux individus selon un point de découpe.
+        Effectue un croisement à un point sur chaque coordonnée des individus.
 
-        :param points_de_coupe: Nombre de points de découpe à utiliser pour le croisement (doit être 1).
-        :return: Liste des individus générés par le croisement.
+        :param ind1: Premier individu (objet Individu).
+        :param ind2: Deuxième individu (objet Individu).
+        :return: Liste des individus enfants générés par le croisement.
         """
-        # Valider les individus
-        self.validate_individuals()
+        enfants = [Individu([]), Individu([])]  # Créer deux enfants vides
 
-        # Récupérer les individus sélectionnés
-        ind1, ind2 = self.selected_individuals
+        for coord1, coord2 in zip(ind1.coordonnees, ind2.coordonnees):
+            # On récupére les codages binaires des coordonnées
+            code1 = coord1.get_codage_coordonnee()
+            code2 = coord2.get_codage_coordonnee()
 
-        # Longueur du chromosome
-        length = len(ind1)
+            # On effectue le croisement à un point de découpe
+            point_de_coupe = random.randint(1, len(code1) - 1)
+            enfant1_code = code1[:point_de_coupe] + code2[point_de_coupe:]
+            enfant2_code = code2[:point_de_coupe] + code1[point_de_coupe:]
 
-        if points_de_coupe != 1:
-            raise ValueError(
-                "Le nombre de points de découpe doit être 1 pour le croisement simple."
+            # On décode les nouveaux codes en valeurs
+            enfant1_valeur = coord1.typeCodage.decode(enfant1_code)
+            enfant2_valeur = coord2.typeCodage.decode(enfant2_code)
+
+            # On attribue les nouvelles coordonnées aux enfants
+            enfants[0].coordonnees.append(
+                Coordonnee(coord1.nom, coord1.typeCodage, enfant1_valeur)
+            )
+            enfants[1].coordonnees.append(
+                Coordonnee(coord2.nom, coord2.typeCodage, enfant2_valeur)
             )
 
-        # Créer un point de découpe aléatoire
-        point_de_coupe = random.randint(1, length - 1)
-
-        # Effectuer le croisement
-        enfant1 = ind1[:point_de_coupe] + ind2[point_de_coupe:]
-        enfant2 = ind2[:point_de_coupe] + ind1[point_de_coupe:]
-
-        return [enfant1, enfant2], point_de_coupe
+        return enfants
 
 
 class CroisementDouble(Croisement):
-    def __init__(self, selected_individuals):
-        super().__init__(selected_individuals)
+    def __init__(self):
+        super().__init__()
 
-    def perform_crossover(self, points_de_coupe=2):
+    def perform_crossover(self, ind1, ind2):
         """
-        Effectue le croisement entre deux individus selon deux points de découpe.
+        Effectue un croisement à deux points sur chaque coordonnée des individus.
 
-        :param points_de_coupe: Nombre de points de découpe à utiliser pour le croisement (doit être 2).
-        :return: Liste des individus générés par le croisement.
+        :param ind1: Premier individu (objet Individu).
+        :param ind2: Deuxième individu (objet Individu).
+        :return: Liste des individus enfants générés par le croisement.
         """
-        # Valider les individus
-        self.validate_individuals()
+        enfants = [Individu([]), Individu([])]  # Créer deux enfants vides
 
-        # Récupérer les individus sélectionnés
-        ind1, ind2 = self.selected_individuals
+        for coord1, coord2 in zip(ind1.coordonnees, ind2.coordonnees):
+            # On récupére les codages binaires des coordonnées
+            code1 = coord1.get_codage_coordonnee()
+            code2 = coord2.get_codage_coordonnee()
 
-        # Longueur du chromosome
-        length = len(ind1)
+            # On effectue le croisement à deux points de découpe
+            point1, point2 = sorted(random.sample(range(1, len(code1)), 2))
+            enfant1_code = code1[:point1] + code2[point1:point2] + code1[point2:]
+            enfant2_code = code2[:point1] + code1[point1:point2] + code2[point2:]
 
-        if points_de_coupe != 2:
-            raise ValueError(
-                "Le nombre de points de découpe doit être 2 pour le croisement double."
+            # On décode les nouveaux codes en valeurs
+            enfant1_valeur = coord1.typeCodage.decode(enfant1_code)
+            enfant2_valeur = coord2.typeCodage.decode(enfant2_code)
+
+            # On attribue les nouvelles coordonnées aux enfants
+            enfants[0].coordonnees.append(
+                Coordonnee(coord1.nom, coord1.typeCodage, enfant1_valeur)
+            )
+            enfants[1].coordonnees.append(
+                Coordonnee(coord2.nom, coord2.typeCodage, enfant2_valeur)
             )
 
-        # Créer deux points de découpe aléatoires distincts
-        point1, point2 = sorted(random.sample(range(1, length), 2))
-
-        # Découper les chromosomes en trois segments
-        segment1_ind1, segment2_ind1, segment3_ind1 = (
-            ind1[:point1],
-            ind1[point1:point2],
-            ind1[point2:],
-        )
-        segment1_ind2, segment2_ind2, segment3_ind2 = (
-            ind2[:point1],
-            ind2[point1:point2],
-            ind2[point2:],
-        )
-
-        # Générer les enfants en alternant les segments
-        enfant1 = segment1_ind1 + segment2_ind2 + segment3_ind1
-        enfant2 = segment1_ind2 + segment2_ind1 + segment3_ind2
-
-        return [enfant1, enfant2], point1, point2
+        return enfants
 
 
-# Petit test
+# Exemple d'utilisation
 if __name__ == "__main__":
-    parent1 = 1.05
-    parent2 = 2.86
-    codage = CodageBinaire([23, 8])
+    # Création de la fenêtre et du codage binaire
+    from Fenetre import Fenetre
+    from CodageBinaire import CodageBinaire
 
-    binary_parent1 = codage.code(parent1)
-    binary_parent2 = codage.code(parent2)
+    fenetre = Fenetre("x", 0, 10)  # Exemple de fenêtre
+    codage = CodageBinaire([23, 8])  # Exemple de codage
 
-    individus = [binary_parent1, binary_parent2]
-    croisement = CroisementSimple(individus)
-    enfants1, point1 = croisement.perform_crossover(points_de_coupe=1)
-    croisement = CroisementDouble(individus)
-    enfants2, point2, point3 = croisement.perform_crossover(points_de_coupe=2)
-
-    print(
-        f"Parent 1 (binaire): {binary_parent1} / (non-binaire): {parent1}\nParent 2 (binaire): {binary_parent2} / (non-binaire): {parent2}"
+    # Création des individus avec leurs coordonnées
+    ind1 = Individu(
+        [
+            Coordonnee(fenetre, codage, valeur=2.5),
+            Coordonnee(fenetre, codage, valeur=7.3),
+        ]
     )
-    print(f"\nDécoupe à la position {point1} :")
+    ind2 = Individu(
+        [
+            Coordonnee(fenetre, codage, valeur=4.8),
+            Coordonnee(fenetre, codage, valeur=1.2),
+        ]
+    )
 
-    for enfant, i in zip(enfants1, range(len(enfants1))):
-        print(
-            f"Enfant {i + 1} (binaire): {enfant} / (non-binaire) {codage.decode(enfant)}"
-        )
+    # Croisement simple
+    croisement_simple = CroisementSimple()
+    enfants_simple = croisement_simple.perform_crossover(ind1, ind2)
+    print("Enfants après croisement simple :")
+    for enfant in enfants_simple:
+        for coord in enfant.coordonnees:
+            print(f"Nom: {coord.nom}, Valeur: {coord.valeur}")
 
-    print(f"\nDécoupe aux positions {point2} et {point3}:")
-
-    for enfant, i in zip(enfants2, range(len(enfants2))):
-        print(
-            f"Enfant {i + 1} (binaire): {enfant} / (non-binaire) {codage.decode(enfant)}"
-        )
+    # Croisement double
+    # croisement_double = CroisementDouble()
+    # enfants_double = croisement_double.perform_crossover(ind1, ind2)
+    # print("\nEnfants après croisement double :")
+    # for enfant in enfants_double:
+    #     for coord in enfant.coordonnees:
+    #         print(f"Nom: {coord.nom}, Valeur: {coord.valeur}")
