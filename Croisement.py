@@ -39,8 +39,8 @@ class CroisementSimple(Croisement):
 
         for coord1, coord2 in zip(ind1.coordonnees, ind2.coordonnees):
             # On récupére les codages binaires des coordonnées
-            code1 = coord1.codeBaseX()
-            code2 = coord2.codeBaseX()
+            code1 = coord1.get_codage_coordonnee()
+            code2 = coord2.get_codage_coordonnee()
 
             # On effectue le croisement à un point de découpe
             point_de_coupe = random.randint(1, len(code1) - 1)
@@ -78,8 +78,8 @@ class CroisementDouble(Croisement):
 
         for coord1, coord2 in zip(ind1.coordonnees, ind2.coordonnees):
             # On récupére les codages binaires des coordonnées
-            code1 = coord1.codeBaseX()
-            code2 = coord2.codeBaseX()
+            code1 = coord1.get_codage_coordonnee()
+            code2 = coord2.get_codage_coordonnee()
 
             # On effectue le croisement à deux points de découpe
             point1, point2 = sorted(random.sample(range(1, len(code1)), 2))
@@ -133,9 +133,9 @@ if __name__ == "__main__":
             print(f"Nom: {coord.nom}, Valeur: {coord.valeur}")
 
     # Croisement double
-    # croisement_double = CroisementDouble()
-    # enfants_double = croisement_double.perform_crossover(ind1, ind2)
-    # print("\nEnfants après croisement double :")
-    # for enfant in enfants_double:
-    #     for coord in enfant.coordonnees:
-    #         print(f"Nom: {coord.nom}, Valeur: {coord.valeur}")
+    croisement_double = CroisementDouble()
+    enfants_double = croisement_double.perform_crossover(ind1, ind2)
+    print("\nEnfants après croisement double :")
+    for enfant in enfants_double:
+        for coord in enfant.coordonnees:
+            print(f"Nom: {coord.nom}, Valeur: {coord.valeur}")
