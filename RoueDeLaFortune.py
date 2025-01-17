@@ -21,10 +21,10 @@ from Carre import F
 
 class RoueDeLaFortune(Selection):
 
-    def calcule_total_performance(self):
+    def calcule_total_performance(self, population, offset):
         total_perf = sum(
-            1 / (individu.scorePerformance + 1e-9)
-            for individu in self.population.individus
+            1 / (individu.scorePerformance + offset + 1e-9)
+            for individu in population.individus
         )
         return total_perf
 
@@ -45,22 +45,18 @@ class RoueDeLaFortune(Selection):
             individu.scorePerformance + offset for individu in self.population.individus
         ]"""
 
-    def offset_score(self):
-        offset = abs(
+    def get_offset(self, population):
+        return abs(
             min(
                 0,
-                min(
-                    individu.scorePerformance for individu in self.population.individus
-                ),
+                min(individu.scorePerformance for individu in population.individus),
             )
         )
-        for individu in self.population.individus:
-            individu.scorePerformance += offset
 
-    def roue_de_la_fortune(self):
+    def roue_de_la_fortune(self, population):
         # Calcul de la performance totale
-        self.offset_score()
-        total_performance = self.calcule_total_performance()
+        offset = self.get_offset(population)
+        total_performance = self.calcule_total_performance(population, offset)
 
         # Tirage d'un nombre aléatoire entre 0 et la somme totale des performances en valeur absolue
         valeurAleatoire = random.uniform(0, abs(total_performance))
@@ -68,45 +64,45 @@ class RoueDeLaFortune(Selection):
         # Parcours de la population et sélection de l'individu correspondant
         perf = 0
         scoreIndividu = 0
-        for individu in self.population.individus:
+        for individu in population.individus:
             # On utilise l'inverse de la fonction pour minimiser : les proportions les plus faibles deviennent les plus grandes
             # print("score =", individu.scorePerformance)
-            perf += 1 / (individu.scorePerformance + 1e-9)
+            perf += 1 / (individu.scorePerformance + offset + 1e-9)
             if perf >= valeurAleatoire:
                 return individu, perf
 
-    def selection_parents(self):
+    def selection_parents(self, population):
 
-        parent1 = self.roue_de_la_fortune()
-        parent2 = self.roue_de_la_fortune()
+        parent1 = self.roue_de_la_fortune(population)
+        parent2 = self.roue_de_la_fortune(population)
 
         while parent1 == parent2:
-            parent2 = self.roue_de_la_fortune()
+            parent2 = self.roue_de_la_fortune(population)
 
         return parent1, parent2
 
-    def selection_n_individus(self):
+    def selection_n_individus(self, population):
 
         # initialisation de la population de sortie
         population_sortie = []
 
-        for i in range(self.population.nombreMax):
+        for i in range(population.nombreMax):
             # selection d'un premier individu parmi la population
-            individu_1 = self.roue_de_la_fortune()[0]
+            individu_1 = self.roue_de_la_fortune(population)[0]
             # on enlève l'individu de la population initiale et on l'ajoute à la population de sortie
-            self.population.individus.remove(individu_1)
+            population.individus.remove(individu_1)
             population_sortie.append(individu_1)
 
         return Population(
-            self.population.nombreMax,
-            self.population.fonctionPerformance,
+            population.nombreMax,
+            population.fonctionPerformance,
             population_sortie,
         )
 
 
 if __name__ == "__main__":
     # choix de la fonction carré à une variable
-    f = F("f")
+    f = F()
 
     # initialisation de la fenetre
     fenetreX = Fenetre(-10, 10, "x")
@@ -156,11 +152,14 @@ if __name__ == "__main__":
 
     print("type = ", type(population_fusion))
 
-    methode = RoueDeLaFortune(population)
-    print("performance totale = ", methode.calcule_total_performance())
-    listeParents = methode.selection_parents()
+    methode = RoueDeLaFortune()
+    print(
+        "performance totale = ",
+        methode.calcule_total_performance(population, methode.get_offset(population)),
+    )
+    listeParents = methode.selection_parents(population)
     print([parent[0].coordonnees[0].valeur for parent in listeParents])
 
-    methode1 = RoueDeLaFortune(population_fusion)
-    nouvelle_population = methode1.selection_n_individus()
+    methode1 = RoueDeLaFortune()
+    nouvelle_population = methode1.selection_n_individus(population_fusion)
     print([parent.coordonnees[0].valeur for parent in nouvelle_population.individus])
