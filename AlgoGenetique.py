@@ -2,7 +2,7 @@ from Fenetre import Fenetre
 from Population import Population
 from RoueDeLaFortune import RoueDeLaFortune
 from CodageBinaire import CodageBinaire
-from F2 import F2
+from Carre import F
 from Croisement import CroisementSimple
 
 
@@ -39,14 +39,13 @@ class AlgoGenetique:
             # Construction des couples
             couples = []
 
-            while len(population_copy) > 1:
-                [parent1, parent2] = self.selection.selection_parents()
+            while len(population_copy.individus) > 1:
+                [parent1, parent2] = self.selection.selection_parents(population_copy)
                 population_copy.supprimer_individus([parent1, parent2])
                 couples.append([parent1, parent2])
 
             # Construction des enfants
             enfants = []
-
             for couple in couples:
                 enfant1, enfant2 = self.croisement.perform_crossover(
                     couple[0], couple[1]
@@ -61,18 +60,22 @@ class AlgoGenetique:
                 self.individu_min = self.population.lf_individu_minimal()
 
             # Selection prochaine generation
-            self.population.ajouter_individus([enfants])
+            self.population.ajouter_individus(enfants)
             self.selection.selection_n_individus(self.population)
+
+        return [
+            coordonnee.valeur for coordonnee in self.individu_min.coordonnees
+        ], self.individu_min.scorePerformance
 
 
 if __name__ == "__main__":
     alg = AlgoGenetique(
-        F2(),
-        [[-10, 10], [-5, 5]],
-        10,
-        10,
-        CodageBinaire([52, 11]),
+        F(),
+        [[-10, 10]],
+        50,
+        50,
+        CodageBinaire([52, 10]),
         RoueDeLaFortune(),
         CroisementSimple(),
     )
-    print(alg.fenetres[0].min)
+    print(alg.get_min()[1])
