@@ -48,15 +48,15 @@ class CroisementSimple(Croisement):
             enfant2_code = code2[:point_de_coupe] + code1[point_de_coupe:]
 
             # On décode les nouveaux codes en valeurs
-            enfant1_valeur = coord1.typeCodage.decode(enfant1_code)
-            enfant2_valeur = coord2.typeCodage.decode(enfant2_code)
+            enfant1_valeur = coord1.type_codage.decode(enfant1_code)
+            enfant2_valeur = coord2.type_codage.decode(enfant2_code)
 
             # On attribue les nouvelles coordonnées aux enfants
             enfants[0].coordonnees.append(
-                Coordonnee(coord1.nom, coord1.typeCodage, enfant1_valeur)
+                Coordonnee(coord1.nom, coord1.type_codage, enfant1_valeur)
             )
             enfants[1].coordonnees.append(
-                Coordonnee(coord2.nom, coord2.typeCodage, enfant2_valeur)
+                Coordonnee(coord2.nom, coord2.type_codage, enfant2_valeur)
             )
 
         return enfants

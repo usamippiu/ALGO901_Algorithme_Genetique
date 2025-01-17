@@ -3,17 +3,17 @@ from Coordonnee import Coordonnee
 
 
 class Population:
-    def __init__(self, nombreMax, fonctionPerformance, individus=None):
+    def __init__(self, nombre_max, fonction_performance, individus=None):
         if individus is None:
             self.individus = []
         else:
             self.individus = individus
-        self.nombreMax = nombreMax
-        self.fonctionPerformance = fonctionPerformance  # Objet = fonction qu'on va utiliser pour évaluer la population
+        self.nombre_max = nombre_max
+        self.fonction_performance = fonction_performance  # Objet = fonction qu'on va utiliser pour évaluer la population
 
     def copy(self):
         return Population(
-            self.nombreMax, self.fonctionPerformance, self.individus.copy()
+            self.nombre_max, self.fonction_performance, self.individus.copy()
         )
 
     # Ajouter des individus dans la population, prend en parametre une liste d'individus
@@ -21,7 +21,7 @@ class Population:
         # le if ne sert à rien, de + on veut pouvoir avec une pop + grande que self.nombreMax pour ensuite en selectionner que self.nombreMax
         """
         if (
-            len(self.individus) + len(individus) <= self.nombreMax
+            len(self.individus) + len(individus) <= self.nombre_max
         ):  # peut on bien ajouter la liste ? Si oui :
             # on calcule le score des individus et on les ajoute
             [
@@ -34,7 +34,7 @@ class Population:
             print("Population maximale atteinte.")
         """
         for individu in individus:
-            if individu.scorePerformance is None:
+            if individu.score_performance is None:
                 individu.set_score_performance(self)
 
         self.individus.extend(individus)
@@ -64,16 +64,16 @@ class Population:
             print("La population est vide.")
 
     # On va générer une population d'individus aléatoirement
-    def generer_population(self, fenetres, typeCodage):
+    def generer_population(self, fenetres, type_codage):
         # On a besoin d'une methode qui init un individu et on fait une boucle jusqu'à atteindre nb max, puis on les ajoute
         # on genere des coordonnees aleatoires , on evalue les coordonnees, on les code et on génère l'individu avec
 
-        for n in range(self.nombreMax):
+        for n in range(self.nombre_max):
 
             coordonnees = []
             # On genere ensuite des valeurs de coordonnees # On a n fenetres donc n coordonnées, on a besoin de les associer à un individu
             for i in range(len(fenetres)):  # dimension du travail
-                coordonnee_alea = Coordonnee(fenetres[i], typeCodage)
+                coordonnee_alea = Coordonnee(fenetres[i], type_codage)
                 # coordonnee_alea.set_valeur_coordonnee(fenetres[i])
                 coordonnees.append(coordonnee_alea)
 
@@ -88,7 +88,7 @@ class Population:
 
         # Utiliser la fonction min avec une clé pour comparer les scores
         individu_min = min(
-            self.individus, key=lambda individu: individu.scorePerformance
+            self.individus, key=lambda individu: individu.score_performance
         )
 
         return individu_min

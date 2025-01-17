@@ -23,7 +23,7 @@ class RoueDeLaFortune(Selection):
 
     def calcule_total_performance(self, population, offset):
         total_perf = sum(
-            1 / (individu.scorePerformance + offset + 1)
+            1 / (individu.score_performance + offset + 1)
             for individu in population.individus
         )
         return total_perf
@@ -49,7 +49,7 @@ class RoueDeLaFortune(Selection):
         return abs(
             min(
                 0,
-                min(individu.scorePerformance for individu in population.individus),
+                min(individu.score_performance for individu in population.individus),
             )
         )
 
@@ -59,15 +59,15 @@ class RoueDeLaFortune(Selection):
         total_performance = self.calcule_total_performance(population, offset)
 
         # Tirage d'un nombre aléatoire entre 0 et la somme totale des performances en valeur absolue
-        valeurAleatoire = random.uniform(0, abs(total_performance))
+        valeur_aleatoire = random.uniform(0, abs(total_performance))
 
         # Parcours de la population et sélection de l'individu correspondant
         perf = 0
         for individu in population.individus:
             # On utilise l'inverse de la fonction pour minimiser : les proportions les plus faibles deviennent les plus grandes
             # print("score =", individu.scorePerformance)
-            perf += 1 / (individu.scorePerformance + offset + 1)
-            if perf >= valeurAleatoire:
+            perf += 1 / (individu.score_performance + offset + 1)
+            if perf >= valeur_aleatoire:
                 return individu, perf
 
     def selection_parents(self, population):
@@ -84,7 +84,7 @@ class RoueDeLaFortune(Selection):
         # initialisation de la population de sortie
         individus_sortie = []
 
-        for i in range(population.nombreMax):
+        for i in range(population.nombre_max):
             # selection d'un premier individu parmi la population
             individu_1 = self.roue_de_la_fortune(population)[0]
             # on enlève l'individu de la population initiale et on l'ajoute à la population de sortie

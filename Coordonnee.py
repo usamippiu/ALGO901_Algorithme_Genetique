@@ -7,7 +7,7 @@ import random
 
 # liste de fenetres
 class Coordonnee:
-    def __init__(self, fenetre, typeCodage, valeur=None):
+    def __init__(self, fenetre, type_codage, valeur=None):
         if type(fenetre) != str:
             self.nom = fenetre  # nom de la variable
         else:
@@ -16,16 +16,16 @@ class Coordonnee:
             self.valeur = valeur  # sa valeur
         else:
             self.valeur = random.uniform(fenetre.min, fenetre.max)
-        self.typeCodage = typeCodage  # savoir dans quelle base ie quel objet on a
-        self.codeBaseX = (
-            self.set_code_base_X()
+        self.type_codage = type_codage  # savoir dans quelle base ie quel objet on a
+        self.code_base_x = (
+            self.set_code_base_x()
         )  # avoir la conversion des coordonnées dans la base selectionnée
 
-    def set_code_base_X(self):
-        self.typeCodage.code(self.valeur)
+    def set_code_base_x(self):
+        self.type_codage.code(self.valeur)
 
     def get_codage_coordonnee(self):
-        return self.typeCodage.code(self.valeur)
+        return self.type_codage.code(self.valeur)
 
     def get_valeur_coordonnee(self):
         return self.valeur
