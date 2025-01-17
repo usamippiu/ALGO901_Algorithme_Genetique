@@ -8,7 +8,10 @@ import random
 # liste de fenetres
 class Coordonnee:
     def __init__(self, fenetre, typeCodage, valeur=None):
-        self.nom = fenetre.nom  # nom de la variable
+        if type(fenetre) != str:
+            self.nom = fenetre  # nom de la variable
+        else:
+            self.nom = fenetre.nom
         if valeur is not None:
             self.valeur = valeur  # sa valeur
         else:
