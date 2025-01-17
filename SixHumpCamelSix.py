@@ -2,6 +2,10 @@ from Performance import Performance
 
 
 class SixHumpCamelSix(Performance):
+
+    def __init__(self):
+        self.nom = "SixHumpCamelSix"
+
     def eval(self, coordonees):
         x1, x2 = coordonees
         return (

@@ -3,6 +3,10 @@ import numpy as np
 
 
 class F9(Performance):
+
+    def __init__(self):
+        self.nom = "F9"
+
     def eval(self, coordonees):
         return 10 + sum(-x * np.sin(np.sqrt(np.abs(x))) for x in coordonees)
 

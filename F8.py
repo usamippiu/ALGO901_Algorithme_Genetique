@@ -3,6 +3,10 @@ import numpy as np
 
 
 class F8(Performance):
+
+    def __init__(self):
+        self.nom = "F8"
+
     def eval(self, coordonees):
         return (
             1

@@ -3,6 +3,10 @@ import numpy as np
 
 
 class F6(Performance):
+
+    def __init__(self):
+        self.nom = "F6"
+
     def eval(self, coordonees):
         x, y = coordonees
         numerateur = np.sin(np.sqrt(x**2 + y**2)) ** 2 - 0.5
