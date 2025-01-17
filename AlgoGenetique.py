@@ -1,5 +1,9 @@
 from Fenetre import Fenetre
 from Population import Population
+from RoueDeLaFortune import RoueDeLaFortune
+from CodageBinaire import CodageBinaire
+from F2 import F2
+from Croisement import CroisementSimple
 
 
 class AlgoGenetique:
@@ -10,6 +14,8 @@ class AlgoGenetique:
         taille_population,
         nb_iter_max,
         codage,
+        selection,
+        croisement,
     ):
         self.fonction = fonction
         self.nb_iter_max = nb_iter_max
@@ -19,16 +25,54 @@ class AlgoGenetique:
             self.fenetres.append(Fenetre(f"x{i}", ranges[i][0], ranges[i][1]))
         self.codage = codage
         self.population = Population(self.taille_population, self.fonction)
+        self.selection = selection
+        self.croisement = croisement
 
         self.population.generer_population(self.fenetres, self.codage)
         self.individu_min = self.population.lf_individu_minimal()
 
     def get_min(self):
-        nb_iter = 0
-        while nb_iter < self.nb_iter_max:
-            pass
+        for nb_iter in range(self.nb_iter_max):
+            # Pour la selection des parents on copie avant
+            population_copy = self.population.copy()
+
+            # Construction des couples
+            couples = []
+
+            while len(population_copy) > 1:
+                [parent1, parent2] = self.selection.selection_parents()
+                population_copy.supprimer_individus([parent1, parent2])
+                couples.append([parent1, parent2])
+
+            # Construction des enfants
+            enfants = []
+
+            for couple in couples:
+                enfant1, enfant2 = self.croisement.perform_crossover(
+                    couple[0], couple[1]
+                )
+                enfants += [enfant1, enfant2]
+
+            # Check min avant de changer de pop
+            if (
+                self.individu_min.scorePerformance
+                > self.population.lf_individu_minimal().scorePerformance
+            ):
+                self.individu_min = self.population.lf_individu_minimal()
+
+            # Selection prochaine generation
+            self.population.ajouter_individus([enfants])
+            self.selection.selection_n_individus(self.population)
 
 
 if __name__ == "__main__":
-    alg = AlgoGenetique(10, 10, [[-10, 10], [-5, 5]])
+    alg = AlgoGenetique(
+        F2(),
+        [[-10, 10], [-5, 5]],
+        10,
+        10,
+        CodageBinaire([52, 11]),
+        RoueDeLaFortune(),
+        CroisementSimple(),
+    )
     print(alg.fenetres[0].min)
