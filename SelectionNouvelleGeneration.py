@@ -1,4 +1,4 @@
-class SelectionNouvelleGeneration:
+"""class SelectionNouvelleGeneration:
     def __init__(self, population, enfants, mutation=None):
         self.population = population
         self.enfants = enfants
@@ -6,3 +6,6 @@ class SelectionNouvelleGeneration:
 
     def selection_nouvelle_generation(self):
         pass
+"""
+
+# Obsolète
