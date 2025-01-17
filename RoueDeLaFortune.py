@@ -93,11 +93,7 @@ class RoueDeLaFortune(Selection):
             population.individus.remove(individu_1)
             population_sortie.append(individu_1)
 
-        return Population(
-            population.nombreMax,
-            population.fonctionPerformance,
-            population_sortie,
-        )
+        return population_sortie
 
 
 if __name__ == "__main__":
@@ -162,4 +158,4 @@ if __name__ == "__main__":
 
     methode1 = RoueDeLaFortune()
     nouvelle_population = methode1.selection_n_individus(population_fusion)
-    print([parent.coordonnees[0].valeur for parent in nouvelle_population.individus])
+    print([parent.coordonnees[0].valeur for parent in nouvelle_population])
