@@ -39,8 +39,8 @@ class CroisementSimple(Croisement):
 
         for coord1, coord2 in zip(ind1.coordonnees, ind2.coordonnees):
             # On récupére les codages binaires des coordonnées
-            code1 = coord1.get_codage_coordonnee()
-            code2 = coord2.get_codage_coordonnee()
+            code1 = coord1.codeBaseX()
+            code2 = coord2.codeBaseX()
 
             # On effectue le croisement à un point de découpe
             point_de_coupe = random.randint(1, len(code1) - 1)
@@ -78,8 +78,8 @@ class CroisementDouble(Croisement):
 
         for coord1, coord2 in zip(ind1.coordonnees, ind2.coordonnees):
             # On récupére les codages binaires des coordonnées
-            code1 = coord1.get_codage_coordonnee()
-            code2 = coord2.get_codage_coordonnee()
+            code1 = coord1.codeBaseX()
+            code2 = coord2.codeBaseX()
 
             # On effectue le croisement à deux points de découpe
             point1, point2 = sorted(random.sample(range(1, len(code1)), 2))
