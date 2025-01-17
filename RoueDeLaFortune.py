@@ -84,16 +84,16 @@ class RoueDeLaFortune(Selection):
     def selection_n_individus(self, population):
 
         # initialisation de la population de sortie
-        population_sortie = []
+        individus_sortie = []
 
         for i in range(population.nombreMax):
             # selection d'un premier individu parmi la population
             individu_1 = self.roue_de_la_fortune(population)[0]
             # on enlève l'individu de la population initiale et on l'ajoute à la population de sortie
             population.individus.remove(individu_1)
-            population_sortie.append(individu_1)
+            individus_sortie.append(individu_1)
 
-        return population_sortie
+        population.individus = individus_sortie
 
 
 if __name__ == "__main__":
@@ -157,5 +157,5 @@ if __name__ == "__main__":
     print([parent[0].coordonnees[0].valeur for parent in listeParents])
 
     methode1 = RoueDeLaFortune()
-    nouvelle_population = methode1.selection_n_individus(population_fusion)
-    print([parent.coordonnees[0].valeur for parent in nouvelle_population])
+    methode1.selection_n_individus(population_fusion)
+    print([parent.coordonnees[0].valeur for parent in population_fusion.individus])
