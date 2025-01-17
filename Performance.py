@@ -1,6 +1,6 @@
 class Performance:
-    def __init__(self, nom):
-        self.nom = nom
+    def __init__(self):
+        self.nom = None
 
     def eval(self, coordonees):
         pass
