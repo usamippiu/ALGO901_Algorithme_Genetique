@@ -1,7 +1,9 @@
 from Fenetre import Fenetre
 from Population import Population
 from RoueDeLaFortune import RoueDeLaFortune
+from Tournoi import Tournoi
 from CodageBinaire import CodageBinaire
+from CodageHexadecimal import CodageHexadecimal
 from Carre import F
 from Croisement import CroisementSimple
 
@@ -54,18 +56,20 @@ class AlgoGenetique:
 
             # Check min avant de changer de pop
             if (
-                self.individu_min.scorePerformance
-                > self.population.lf_individu_minimal().scorePerformance
+                self.individu_min.score_performance
+                > self.population.lf_individu_minimal().score_performance
             ):
                 self.individu_min = self.population.lf_individu_minimal()
 
             # Selection prochaine generation
             self.population.ajouter_individus(enfants)
-            self.selection.selection_n_individus(self.population)
+            self.selection.selection_n_individus(
+                self.population, (self.population.nombre_max)
+            )
 
         return [
             coordonnee.valeur for coordonnee in self.individu_min.coordonnees
-        ], self.individu_min.scorePerformance
+        ], self.individu_min.score_performance
 
 
 if __name__ == "__main__":
@@ -74,8 +78,8 @@ if __name__ == "__main__":
         [[-10, 10]],
         50,
         50,
-        CodageBinaire([52, 10]),
-        RoueDeLaFortune(),
+        CodageHexadecimal([52, 11]),
+        Tournoi(0.9),
         CroisementSimple(),
     )
     print(alg.get_min()[1])
