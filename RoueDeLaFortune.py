@@ -23,7 +23,7 @@ class RoueDeLaFortune(Selection):
 
     def calcule_total_performance(self, population, offset):
         total_perf = sum(
-            1 / (individu.scorePerformance + offset + 1e-9)
+            1 / (individu.scorePerformance + offset + 1)
             for individu in population.individus
         )
         return total_perf
@@ -63,21 +63,19 @@ class RoueDeLaFortune(Selection):
 
         # Parcours de la population et sélection de l'individu correspondant
         perf = 0
-        scoreIndividu = 0
         for individu in population.individus:
             # On utilise l'inverse de la fonction pour minimiser : les proportions les plus faibles deviennent les plus grandes
             # print("score =", individu.scorePerformance)
-            perf += 1 / (individu.scorePerformance + offset + 1e-9)
+            perf += 1 / (individu.scorePerformance + offset + 1)
             if perf >= valeurAleatoire:
                 return individu, perf
 
     def selection_parents(self, population):
 
-        parent1 = self.roue_de_la_fortune(population)
-        parent2 = self.roue_de_la_fortune(population)
-
+        parent1 = self.roue_de_la_fortune(population)[0]
+        parent2 = self.roue_de_la_fortune(population)[0]
         while parent1 == parent2:
-            parent2 = self.roue_de_la_fortune(population)
+            parent2 = self.roue_de_la_fortune(population)[0]
 
         return parent1, parent2
 
