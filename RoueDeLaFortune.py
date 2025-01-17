@@ -1,6 +1,6 @@
 import random
 
-from SelectionParents import SelectionParents as Selection
+from Selection import Selection
 from Individu import Individu
 from Coordonnee import Coordonnee
 from Fenetre import Fenetre
