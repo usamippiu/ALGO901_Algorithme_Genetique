@@ -33,10 +33,10 @@ class Tournoi(Selection):
         return n_individus
 
     def selection_parents(self, population):
-        return self.tournoi(population, 2)
+        return self.tournoi(population.individus, 2)
 
     def selection_n_individus(self, population, n):
-        population.individus = self.tournoi(population, n)
+        population.individus = self.tournoi(population.individus, n)
 
 
 if __name__ == "__main__":
