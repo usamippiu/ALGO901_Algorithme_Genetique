@@ -14,7 +14,7 @@ class Tournoi(Selection):
         self.p = p
 
     def tournoi(self, individus, n):
-        individus = population.individus.copy()
+        individus = individus.copy()
         n_individus = []
 
         individus_sorted = sorted(
