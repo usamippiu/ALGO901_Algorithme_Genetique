@@ -5,7 +5,15 @@ from Tournoi import Tournoi
 from CodageBinaire import CodageBinaire
 from CodageHexadecimal import CodageHexadecimal
 from Carre import F
-from Croisement import CroisementSimple
+from Schwefel import Schwefel
+from F2 import F2
+from F6 import F6
+from F7 import F7
+from F8 import F8
+from F9 import F9
+from SixHumpCamelSix import SixHumpCamelSix
+from CroisementSimple import CroisementSimple
+import numpy as np
 
 
 class AlgoGenetique:
@@ -49,10 +57,12 @@ class AlgoGenetique:
             # Construction des enfants
             enfants = []
             for couple in couples:
-                enfant1, enfant2 = self.croisement.perform_crossover(
-                    couple[0], couple[1]
+                enfants_couple = np.array(
+                    self.croisement.perform_crossover(couple[0], couple[1])
                 )
-                enfants += [enfant1, enfant2]
+                np.random.shuffle(enfants_couple)
+
+                enfants += [enfants_couple[0], enfants_couple[1]]
 
             # Check min avant de changer de pop
             if (
@@ -73,13 +83,124 @@ class AlgoGenetique:
 
 
 if __name__ == "__main__":
+    """
     alg = AlgoGenetique(
-        F(),
-        [[-10, 10]],
+        Schwefel(),
+        [[0, 500], [0, 500]],
         50,
-        50,
-        CodageHexadecimal([52, 11]),
-        Tournoi(0.9),
+        100,
+        CodageBinaire([52, 10]),
+        RoueDeLaFortune(),
         CroisementSimple(),
     )
-    print(alg.get_min()[1])
+    res, value = alg.get_min()
+    print(res[0], res[1], value)
+    """
+
+    """
+    alg = AlgoGenetique(
+        SixHumpCamelSix(),
+        [[-5, 5], [-5, 5]],
+        200,
+        500,
+        CodageBinaire([52, 10]),
+        RoueDeLaFortune(),
+        CroisementSimple(),
+    )
+    res, value = alg.get_min()
+    print(res[0], res[1], value)
+    """
+    """
+    alg = AlgoGenetique(
+        F2(),
+        [[-2.048, 2.048], [-2.048, 2.048]],
+        100,
+        100,
+        CodageBinaire([52, 10]),
+        RoueDeLaFortune(),
+        CroisementSimple(),
+    )
+    res, value = alg.get_min()
+    print(res[0], res[1], value)"""
+    """
+    alg = AlgoGenetique(
+        F6(),
+        [[-100, 100], [-100, 100]],
+        100,
+        100,
+        CodageHexadecimal([52, 10]),
+        RoueDeLaFortune(),
+        CroisementSimple(),
+    )
+    res, value = alg.get_min()
+    print(res[0], res[1], value)
+    """
+
+    """alg = AlgoGenetique(
+        F7(),
+        [
+            [-5.12, 5.12],
+            [-5.12, 5.12],
+            [-5.12, 5.12],
+            [-5.12, 5.12],
+            [-5.12, 5.12],
+            [-5.12, 5.12],
+            [-5.12, 5.12],
+            [-5.12, 5.12],
+            [-5.12, 5.12],
+            [-5.12, 5.12],
+        ],
+        100,
+        100,
+        CodageBinaire([52, 10]),
+        RoueDeLaFortune(),
+        CroisementSimple(),
+    )
+    res, value = alg.get_min()
+    print(res[0], res[1], value)"""
+
+    """alg = AlgoGenetique(
+        F8(),
+        [
+            [-600, 600],
+            [-600, 600],
+            [-600, 600],
+            [-600, 600],
+            [-600, 600],
+            [-600, 600],
+            [-600, 600],
+            [-600, 600],
+            [-600, 600],
+            [-600, 600],
+        ],
+        100,
+        100,
+        CodageHexadecimal([52, 10]),
+        RoueDeLaFortune(),
+        CroisementSimple(),
+    )
+    res, value = alg.get_min()
+    print(res[0], res[1], value)"""
+
+    alg = AlgoGenetique(
+        F9(),
+        [
+            [-500, 500],
+            [-500, 500],
+            [-500, 500],
+            [-500, 500],
+            [-500, 500],
+            [-500, 500],
+            [-500, 500],
+            [-500, 500],
+            [-500, 500],
+            [-500, 500],
+        ],
+        100,
+        100,
+        CodageBinaire([52, 10]),
+        RoueDeLaFortune(),
+        CroisementSimple(),
+    )
+    res, value = alg.get_min()
+    print(res[0], res[1], value)
