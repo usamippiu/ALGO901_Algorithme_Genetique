@@ -27,25 +27,65 @@ class Mutation:
                 mutation_valide = False
 
                 while not mutation_valide:
-                    # Obtenir le codage binaire de la coordonnée
+                    # On obtient le codage binaire de la coordonnée
                     code = coord.get_codage_coordonnee()
 
-                    # Choisir un bit aléatoire à inverser
+                    # On choisit un bit aléatoire à inverser
                     bit_a_muter = random.randint(0, len(code) - 1)
                     code_muté = list(
                         code
-                    )  # Transformer la chaîne en liste pour modification
+                    )  # On transforme la chaîne en liste pour modification
                     code_muté[bit_a_muter] = "1" if code[bit_a_muter] == "0" else "0"
                     code_muté = "".join(code_muté)  # Reconstituer la chaîne mutée
 
-                    # Décoder la valeur mutée
+                    # On décode la valeur mutée
                     valeur_mutée = coord.type_codage.decode(code_muté)
 
-                    # Vérifier si la valeur mutée respecte les bornes de la fenêtre
+                    # On vérifie si la valeur mutée respecte les bornes de la fenêtre
                     if coord.nom.min <= valeur_mutée <= coord.nom.max:
                         mutation_valide = True
-                        # Appliquer la mutation
+                        # On applique la mutation
                         coord.valeur = valeur_mutée
-                        coord.type_codage.code = code_muté  # Mettre à jour le codage
+                        coord.type_codage.code = code_muté  # On met à jour le codage
 
         return individu
+
+
+if __name__ == "__main__":
+    from Fenetre import Fenetre
+    from CodageBinaire import CodageBinaire
+    from Individu import Individu
+    from Coordonnee import Coordonnee
+    from Mutation import Mutation
+
+    # Définition des fenêtres et du codage
+    fenetre_x = Fenetre("x", 0, 10)
+    codage = CodageBinaire([23, 8])  # Longueur fixe de 5 bits
+
+    # Création d'un individu
+    individu = Individu(
+        [
+            Coordonnee(fenetre_x, codage, valeur=2.5),
+        ]
+    )
+
+    # Initialisation de la mutation avec un taux faible
+    taux_mutation = 0.001
+    mutation = Mutation(taux_mutation)
+
+    # Individu avant la mutation
+    print("Individu avant mutation :")
+    for coord in individu.coordonnees:
+        print(
+            f"{coord.nom.nom}: {coord.valeur} (code: {coord.get_codage_coordonnee()})"
+        )
+
+    # Mutation
+    individu_muté = mutation.effectuer_mutation(individu)
+
+    # Individu après la mutation
+    print("\nIndividu après mutation :")
+    for coord in individu_muté.coordonnees:
+        print(
+            f"{coord.nom.nom}: {coord.valeur} (code: {coord.get_codage_coordonnee()})"
+        )
