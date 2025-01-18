@@ -1,5 +1,7 @@
 # IMPORTATION DES CLASSES ##############################################################################################
 from Croisement import *
+from CroisementSimple import CroisementSimple
+from CroisementDouble import CroisementDouble
 from Population import Population
 from Performance import Performance
 from Fenetre import Fenetre
