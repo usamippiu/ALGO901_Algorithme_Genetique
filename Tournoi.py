@@ -13,32 +13,30 @@ class Tournoi(Selection):
     def __init__(self, p):
         self.p = p
 
-    def tournoi(self, individus):
+    def tournoi(self, individus, n):
+        individus = population.individus.copy()
+        n_individus = []
+
         individus_sorted = sorted(
             [individu for individu in individus],
             key=lambda x: x.score_performance,
         )
-        weights = np.array(
-            [self.p * (1 - self.p) ** i for i in range(len(individus_sorted))]
-        )
+        weights = [self.p * (1 - self.p) ** i for i in range(len(individus_sorted))]
 
-        return np.random.choice(individus, p=weights / sum(weights))
-
-    def selection_n_indivs(self, population, n):
-        individus = population.individus.copy()
-        n_individus = []
         for i in range(n):
-            individu = self.tournoi(individus)
+            individu = np.random.choice(individus, p=np.array(weights) / sum(weights))
             n_individus.append(individu)
-            individus.remove(individu)
+            index = individus.index(individu)
+            del individus[index]
+            del weights[index]
 
         return n_individus
 
     def selection_parents(self, population):
-        return self.selection_n_indivs(population, 2)
+        return self.tournoi(population, 2)
 
     def selection_n_individus(self, population, n):
-        population.individus = self.selection_n_indivs(population, n)
+        population.individus = self.tournoi(population, n)
 
 
 if __name__ == "__main__":
@@ -79,7 +77,6 @@ if __name__ == "__main__":
 
     # initialisation de la population
     population1 = Population(3, f)
-
     tournoi = Tournoi(0.5)
     tournoi.selection_n_individus(population, 2)
     print([individu.coordonnees[0].valeur for individu in population.individus])
