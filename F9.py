@@ -12,5 +12,5 @@ class F9(Performance):
 
 
 if __name__ == "__main__":
-    func = F9("F9")
+    func = F9()
     print(func.eval(1, [420.9687] * 10))

@@ -15,5 +15,5 @@ class F6(Performance):
 
 
 if __name__ == "__main__":
-    func = F6("F6")
+    func = F6()
     print(func.eval([0, 0]))

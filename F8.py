@@ -16,5 +16,5 @@ class F8(Performance):
 
 
 if __name__ == "__main__":
-    func = F8("F8")
+    func = F8()
     print(func.eval([0] * 10))

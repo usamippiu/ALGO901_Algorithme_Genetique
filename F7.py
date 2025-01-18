@@ -12,5 +12,5 @@ class F7(Performance):
 
 
 if __name__ == "__main__":
-    func = F7("F7")
-    print(func.eval([0] * 20))
+    func = F7()
+    print(func.eval([0] * 10))

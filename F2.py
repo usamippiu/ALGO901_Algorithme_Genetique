@@ -12,5 +12,5 @@ class F2(Performance):
 
 
 if __name__ == "__main__":
-    func = F2("F2")
+    func = F2()
     print(func.eval([1, 1]))
