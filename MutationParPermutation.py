@@ -57,6 +57,7 @@ if __name__ == "__main__":
     from Population import Population
     from Fenetre import Fenetre
     from CodageBinaire import CodageBinaire
+    from CodageHexadecimal import CodageHexadecimal
     from Individu import Individu
     from Coordonnee import Coordonnee
     from F2 import F2
@@ -64,7 +65,7 @@ if __name__ == "__main__":
     # Définition des fenêtres et du codage
     fenetre_x = Fenetre("x", 0, 10)
     fenetre_y = Fenetre("y", -5, 5)
-    codage = CodageBinaire([23, 8])
+    codage = CodageHexadecimal([23, 8])
 
     # Génération de la population
     population = Population(1, F2())  # Population de 1 individu pour l'exemple
