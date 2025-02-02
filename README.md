@@ -7,11 +7,12 @@ La classe ```AlgoGenetique``` cherche le minimum d'une ```fonction``` f dans un 
 Pour obtenir le minimum de la fonction dans l'intervalle choisi, il faut ensuite appeler la fonction ```alg.get_min()```, alg étant l'instance de la classe ```AlgoGenetique```. Cette fonction retourne les coordonnées trouvées par l'algo qui minimise f dans l'intervalle choisi ainsi que la valeur du minimum trouvé.
 
 ## 2. Benchmarks
+### 2.1 Schwefel (R^2)
 Avec les paramètres _ranges_=[-500, 500]^2, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementDouble()``` et _mutation_=```MutationParPermutation(0.1)```. \
 Nous trouvons un minimum en [420.008041359117, 419.9432208826837] qui a pour valeur -837.7167132529034 en 4.84s d'éxéction.
-
-### 2.1 Schwefel (R^2)
 ### 2.2 SixHumpCamelSix
+Avec les paramètres _ranges_=[-5, 5]^2, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementDouble()``` et _mutation_=```MutationParPermutation(0.1)```. \
+Nous trouvons un minimum en [0.06562598207992915, -0.7044206810586376] qui a pour valeur -1.0290151956194344 en 2.37+s d'éxéction.
 ### 2.3 F2
 ### 2.4 F6
 ### 2.5 F7
