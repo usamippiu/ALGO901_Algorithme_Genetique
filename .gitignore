@@ -21,3 +21,7 @@ venv/
 *.bak
 *.swp
 .DS_Store
+
+# Ignorer le dossier .vscode
+.vscode/
+
