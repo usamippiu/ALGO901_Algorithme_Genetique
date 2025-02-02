@@ -1,5 +1,3 @@
-# Importer la classe fenêtre pour initialiser les coordonnées
-# Importer la classe codage
 from Fenetre import Fenetre
 from CodageBinaire import CodageBinaire
 import random

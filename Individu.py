@@ -1,5 +1,3 @@
-# Importer la classe performance
-# Importer la classe croisement
 from Coordonnee import Coordonnee
 
 
