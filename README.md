@@ -8,9 +8,9 @@ Pour obtenir le minimum de la fonction dans l'intervalle choisi, il faut ensuite
 
 ## 2. Benchmarks
 ### 2.1 Schwefel (R^2)
-### 2.2 SixHumpCamelSix (R2)
-### 2.3 F2 (R2)
-### 2.4 F6 (R2)
-### 2.5 F7 (R2)
-### 2.6 F8 (R2)
+### 2.2 SixHumpCamelSix
+### 2.3 F2
+### 2.4 F6
+### 2.5 F7
+### 2.6 F8
 ### 2.7 F9 (Schwefel R^10)
