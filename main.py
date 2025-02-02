@@ -38,9 +38,9 @@ start_func = time.perf_counter()
 res, value = alg.get_min()
 
 # Affichage des résultats :
-print("------------------- Schwefel 2x2 -------------------")
+print("------------------- Schwefel (dim 2) -------------------")
 print(
-    f"Coordonnées de l'individu minimal trouvé : {res[0], res[1]} en {time.perf_counter() - start_func}s"
+    f"Coordonnées de l'individu minimal trouvé : {res[0], res[1]} en {round(time.perf_counter() - start_func, 2)}s"
 )
 print(f"Score de performance de l'individu minimal trouvé : {value}")
 
@@ -215,7 +215,7 @@ start_func = time.perf_counter()
 res, value = alg.get_min()
 
 # Affichage des résultats :
-print("------------------- Schwefel 10x10 -------------------")
+print("------------------- Schwefel (dim 10) -------------------")
 print(
     f"Coordonnées de l'individu minimal trouvé : {res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]} en {round(time.perf_counter() - start_func, 2)}s"
 )
