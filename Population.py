@@ -18,21 +18,6 @@ class Population:
 
     # Ajouter des individus dans la population, prend en parametre une liste d'individus
     def ajouter_individus(self, individus):
-        # le if ne sert à rien, de + on veut pouvoir avec une pop + grande que self.nombreMax pour ensuite en selectionner que self.nombreMax
-        """
-        if (
-            len(self.individus) + len(individus) <= self.nombre_max
-        ):  # peut on bien ajouter la liste ? Si oui :
-            # on calcule le score des individus et on les ajoute
-            [
-                individu.set_score_performance(self)
-                for individu in individus
-                if individu.scorePerformance is None
-            ]
-            self.individus.extend(individus)
-        else:
-            print("Population maximale atteinte.")
-        """
         for individu in individus:
             if individu.score_performance is None:
                 individu.set_score_performance(self)

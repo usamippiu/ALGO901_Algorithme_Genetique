@@ -14,7 +14,7 @@ class Coordonnee:
             self.valeur = valeur  # sa valeur
         else:
             self.valeur = random.uniform(fenetre.min, fenetre.max)
-        self.type_codage = type_codage  # savoir dans quelle base ie quel objet on a
+        self.type_codage = type_codage  # savoir dans quelle base i.e quel objet on a
         self.code_base_x = (
             self.set_code_base_x()
         )  # avoir la conversion des coordonnées dans la base selectionnée
