@@ -11,12 +11,20 @@ Pour obtenir le minimum de la fonction dans l'intervalle choisi, il faut ensuite
 Avec les paramètres _ranges_=[-500, 500]^2, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementDouble()``` et _mutation_=```MutationParPermutation(0.1)```. \
 Nous trouvons un minimum en (420.008041359117, 419.9432208826837) qui a pour valeur -837.7167132529034 en 4.84s d'éxéction.
 ### 2.2 SixHumpCamelSix
-Avec les paramètres _ranges_=[-5, 5]^2, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementDouble()``` et _mutation_=```MutationParPermutation(0.1)```. \
+Avec les paramètres _ranges_=[-5, 5]^2, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParPermutation(0.1)```. \
 Nous trouvons un minimum en (0.06562598207992915, -0.7044206810586376) qui a pour valeur -1.0290151956194344 en 2.37s d'éxéction.
 ### 2.3 F2
-Avec les paramètres _ranges_=[-5, 5]^2, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementDouble()``` et _mutation_=```MutationParPermutation(0.1)```. \
-Nous trouvons un minimum en (0.8460147905284092, 0.7148260122453101) qui a pour valeur 0.023795169715223857 en 2.29s d'éxéction.
+Avec les paramètres _ranges_=[-2.048, 2.048]^2, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParPermutation(0.1)```. \
+Nous trouvons un minimum en (0.9320810161474107, 0.8722344805281042) qui a pour valeur 0.0058097746238172255 en 2.36s d'éxéction.
 ### 2.4 F6
+Avec les paramètres _ranges_=[-100, 100]^2, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageHexadecimal([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParPermutation(0.1)```. \
+Nous trouvons un minimum en ((3.3239639297148236e-144, 5.142668110954431e-144) qui a pour valeur 0.0 en 4.18s d'éxéction.
 ### 2.5 F7
+Avec les paramètres _ranges_=[-5.12, 5.12]^20, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParPermutation(0.1)```. \
+Nous trouvons un minimum en (-3.0339514789280263e-144, -3.6777666486344104e-144) qui a pour valeur 0.023795169715223857 en 8.02s d'éxéction.
 ### 2.6 F8
+Avec les paramètres _ranges_=[-600, 600]^10, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```Tournoi(0.8)```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParFlipping(0.1)```. \
+Nous trouvons un minimum en (-3.0339514789280263e-144, -3.6777666486344104e-144) qui a pour valeur 0.023795169715223857 en 8.02s d'éxéction.
 ### 2.7 F9 (Schwefel R^10)
+Avec les paramètres _ranges_=[-5.12, 5.12]^20, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParPermutation(0.1)```. \
+Nous trouvons un minimum en (-3.0339514789280263e-144, -3.6777666486344104e-144) qui a pour valeur 0.023795169715223857 en 8.02s d'éxéction.
