@@ -48,7 +48,6 @@ class CroisementSimple(Croisement):
         enfants_complets = []
         for combinaison in itertools.product(*enfants_par_variable):
             enfants_complets.append(Individu(list(combinaison)))
-
         return enfants_complets
 
 
