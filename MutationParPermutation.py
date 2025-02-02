@@ -48,6 +48,7 @@ class MutationParPermutation(Mutation):
                         if coord.nom.min <= valeur_mutee <= coord.nom.max:
                             mutation_valide = True
                             coord.valeur = valeur_mutee
+                individu.set_score_performance(population)
 
 
 if __name__ == "__main__":

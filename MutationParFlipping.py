@@ -16,13 +16,10 @@ class MutationParFlipping(Mutation):
         Applique des mutations à une population d'individus.
 
         :param population: Une instance de la classe Population.
-        :return: Une nouvelle instance de Population avec des mutations appliquées.
         """
-        # Copie de la population initiale pour éviter de modifier l'originale
-        nouvelle_population = population.copy()
 
         # Parcourir les individus et appliquer la mutation selon le taux
-        for individu in nouvelle_population.individus:
+        for individu in population.individus:
             if (
                 random.random() < self.taux_mutation
             ):  # On applique la mutation à cet individu
@@ -46,7 +43,7 @@ class MutationParFlipping(Mutation):
                         if coord.nom.min <= valeur_mutee <= coord.nom.max:
                             mutation_valide = True
                             coord.valeur = valeur_mutee
-        return nouvelle_population
+                individu.set_score_performance(population)
 
 
 if __name__ == "__main__":
