@@ -20,8 +20,8 @@ Nous trouvons un minimum en (0.9320810161474107, 0.8722344805281042) qui a pour 
 Avec les paramètres _ranges_=[-100, 100]^2, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageHexadecimal([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParPermutation(0.1)```. \
 Nous trouvons un minimum en (3.3239639297148236e-144, 5.142668110954431e-144) qui a pour valeur 0.0 en 4.18s d'éxéction.
 ### 2.5 F7
-Avec les paramètres _ranges_=[-5.12, 5.12]^20, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParPermutation(0.1)```. \
-Nous trouvons un minimum en (-3.0339514789280263e-144, -3.6777666486344104e-144) qui a pour valeur 0.023795169715223857 en 8.02s d'éxéction.
+Avec les paramètres _ranges_=[-5.12, 5.12]^10, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```RoueDeLaFortune()```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParPermutation(0.1)```. \
+Nous trouvons un minimum en (2.5754158375948877e-72, 2.4310519880463903e-154, -1.5628458933980605e-154, -5.192413801025777e-38, 1.2784195417286513e-19, 2.6658901378036762e-79, -1.3830831976495468e-77, 1.3915578249454917e-21, -7.939906856295589e-96, 2.8715000148249356e-17) qui a pour valeur 100.0 en 45.38s d'éxéction.
 ### 2.6 F8
 Avec les paramètres _ranges_=[-600, 600]^10, _taille\_population_=100, _nb\_iter\_max_=500, _codage_=```CodageBinaire([52, 10])```, _selection_=```Tournoi(0.8)```, _croisement_=```CroisementSimple()``` et _mutation_=```MutationParFlipping(0.1)```. \
 Nous trouvons un minimum en (8.590842397580303e-38, -2.054465568928433e-104, 21.280533354627053, -4.650317313408654, -1.370408706591785e-152, -9.137999087135719e-29, -6.559560404557348, -5.160946493404783e-116, -1.4477094438482678e-142, -2.6250979356259735e-76) qui a pour valeur 0.6103836729369639 en 49.49s d'éxéction.
