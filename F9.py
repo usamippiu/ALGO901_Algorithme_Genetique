@@ -8,7 +8,7 @@ class F9(Performance):
         self.nom = "F9"
 
     def eval(self, coordonees):
-        return 10 + sum(-x * np.sin(np.sqrt(np.abs(x))) for x in coordonees)
+        return 10 + sum(-x * np.sin(np.sqrt(abs(x))) for x in coordonees)
 
 
 if __name__ == "__main__":
