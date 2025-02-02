@@ -38,7 +38,7 @@ start_func = time.perf_counter()
 res, value = alg.get_min()
 
 # Affichage des résultats :
-print("------------------- Schwefel (dim 2) -------------------")
+print("------------------- Schwefel (R^2) -------------------")
 print(
     f"Coordonnées de l'individu minimal trouvé : {res[0], res[1]} en {round(time.perf_counter() - start_func, 2)}s"
 )
@@ -54,7 +54,7 @@ alg = AlgoGenetique(
     codage=CodageBinaire([52, 10]),
     selection=RoueDeLaFortune(),
     croisement=CroisementSimple(),
-    mutation=MutationParPermutation(0.7),
+    mutation=MutationParPermutation(0.1),
 )
 
 # Exécution de l'algorithme :
@@ -78,7 +78,7 @@ alg = AlgoGenetique(
     codage=CodageBinaire([52, 10]),
     selection=RoueDeLaFortune(),
     croisement=CroisementSimple(),
-    mutation=MutationParPermutation(0.7),
+    mutation=MutationParPermutation(0.1),
 )
 
 # Exécution de l'algorithme :
@@ -102,7 +102,7 @@ alg = AlgoGenetique(
     codage=CodageHexadecimal([52, 10]),
     selection=RoueDeLaFortune(),
     croisement=CroisementSimple(),
-    mutation=MutationParPermutation(0.7),
+    mutation=MutationParPermutation(0.1),
 )
 
 # Exécution de l'algorithme :
@@ -137,7 +137,7 @@ alg = AlgoGenetique(
     codage=CodageBinaire([52, 10]),
     selection=RoueDeLaFortune(),
     croisement=CroisementSimple(),
-    mutation=MutationParPermutation(0.7),
+    mutation=MutationParPermutation(0.1),
 )
 
 # Exécution de l'algorithme :
@@ -172,7 +172,7 @@ alg = AlgoGenetique(
     codage=CodageBinaire([52, 10]),
     selection=Tournoi(0.8),
     croisement=CroisementSimple(),
-    mutation=MutationParFlipping(0.7),
+    mutation=MutationParFlipping(0.1),
 )
 
 # Exécution de l'algorithme :
@@ -215,7 +215,7 @@ start_func = time.perf_counter()
 res, value = alg.get_min()
 
 # Affichage des résultats :
-print("------------------- Schwefel (dim 10) -------------------")
+print("------------------- Schwefel (R^10) -------------------")
 print(
     f"Coordonnées de l'individu minimal trouvé : {res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]} en {round(time.perf_counter() - start_func, 2)}s"
 )
