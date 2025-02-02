@@ -28,23 +28,6 @@ class RoueDeLaFortune(Selection):
         )
         return total_perf
 
-    """def calcule_total_performance(self):
-        min_fitness = min(individu.scorePerformance for individu in self.population.individus)
-        offset = abs(min_fitness) + 1e-9  # Décalage pour rendre toutes les valeurs positives
-        total_perf = sum(1/score for score in [individu.scorePerformance + offset for individu in self.population.individus])
-        return total_perf"""
-
-    """def ajuste_fitness(self):
-        min_fitness = min(
-            individu.scorePerformance for individu in self.population.individus
-        )
-        offset = (
-            abs(min_fitness) + 1e-9
-        )  # Décalage pour rendre toutes les valeurs positives
-        return [
-            individu.scorePerformance + offset for individu in self.population.individus
-        ]"""
-
     def get_offset(self, population):
         return abs(
             min(
