@@ -13,6 +13,9 @@ from F8 import F8
 from F9 import F9
 from SixHumpCamelSix import SixHumpCamelSix
 from CroisementSimple import CroisementSimple
+from CroisementDouble import CroisementDouble
+from MutationParPermutation import MutationParPermutation
+from MutationParFlipping import MutationParFlipping
 import numpy as np
 
 
@@ -26,6 +29,7 @@ class AlgoGenetique:
         codage,
         selection,
         croisement,
+        mutation,
     ):
         self.fonction = fonction
         self.nb_iter_max = nb_iter_max
@@ -37,6 +41,7 @@ class AlgoGenetique:
         self.population = Population(self.taille_population, self.fonction)
         self.selection = selection
         self.croisement = croisement
+        self.mutation = mutation
 
         self.population.generer_population(self.fenetres, self.codage)
         self.individu_min = self.population.lf_individu_minimal()
@@ -64,6 +69,10 @@ class AlgoGenetique:
 
                 enfants += [enfants_couple[0], enfants_couple[1]]
 
+            # Mutations
+
+            self.mutation.effectuer_mutation(self.population)
+
             # Check min avant de changer de pop
             if (
                 self.individu_min.score_performance
@@ -83,47 +92,59 @@ class AlgoGenetique:
 
 
 if __name__ == "__main__":
-    """
-    alg = AlgoGenetique(
-        Schwefel(),
-        [[0, 500], [0, 500]],
-        50,
-        100,
-        CodageBinaire([52, 10]),
-        RoueDeLaFortune(),
-        CroisementSimple(),
-    )
-    res, value = alg.get_min()
-    print(res[0], res[1], value)
-    """
 
-    """
-    alg = AlgoGenetique(
-        SixHumpCamelSix(),
-        [[-5, 5], [-5, 5]],
-        200,
+    """alg = AlgoGenetique(
+        Schwefel(),
+        [[-500, 500], [-500, 500]],
+        100,
         500,
         CodageBinaire([52, 10]),
         RoueDeLaFortune(),
-        CroisementSimple(),
+        CroisementDouble(),
+        MutationParPermutation(0.1),
     )
     res, value = alg.get_min()
-    print(res[0], res[1], value)
-    """
-    """
-    alg = AlgoGenetique(
+    print(
+        f"Coordonnées de l'individu minimal trouvé : {res[0], res[1]}"
+    )
+    print(
+        f"Score de performance de l'individu minimal trouvé : {value}",
+        Schwefel().eval(res),
+    )"""
+
+    """alg = AlgoGenetique(
+       SixHumpCamelSix(),
+       [[-5, 5], [-5, 5]],
+       200,
+       500,
+       CodageBinaire([52, 10]),
+       RoueDeLaFortune(),
+       CroisementSimple(),
+       MutationParPermutation(0.7),
+    )
+    res, value = alg.get_min()
+    print(
+        f"Coordonnées de l'individu minimal trouvé : {res[0], res[1]}"
+    )
+    print(f"Score de performance de l'individu minimal trouvé : {value}")"""
+
+    """alg = AlgoGenetique(
         F2(),
         [[-2.048, 2.048], [-2.048, 2.048]],
-        100,
-        100,
+        200,
+        1000,
         CodageBinaire([52, 10]),
         RoueDeLaFortune(),
         CroisementSimple(),
+        MutationParPermutation(0.7),
     )
     res, value = alg.get_min()
-    print(res[0], res[1], value)"""
-    """
-    alg = AlgoGenetique(
+    print(
+        f"Coordonnées de l'individu minimal trouvé : {res[0], res[1]}"
+    )
+    print(f"Score de performance de l'individu minimal trouvé : {value}")"""
+
+    """alg = AlgoGenetique(
         F6(),
         [[-100, 100], [-100, 100]],
         100,
@@ -131,10 +152,13 @@ if __name__ == "__main__":
         CodageHexadecimal([52, 10]),
         RoueDeLaFortune(),
         CroisementSimple(),
+        MutationParPermutation(0.7),
     )
     res, value = alg.get_min()
-    print(res[0], res[1], value)
-    """
+    print(
+        f"Coordonnées de l'individu minimal trouvé : {res[0], res[1]}"
+    )
+    print(f"Score de performance de l'individu minimal trouvé : {value}")"""
 
     """alg = AlgoGenetique(
         F7(),
@@ -150,14 +174,18 @@ if __name__ == "__main__":
             [-5.12, 5.12],
             [-5.12, 5.12],
         ],
-        100,
+        50,
         100,
         CodageBinaire([52, 10]),
         RoueDeLaFortune(),
         CroisementSimple(),
+        MutationParPermutation(0.7),
     )
     res, value = alg.get_min()
-    print(res[0], res[1], value)"""
+    print(
+        f"Coordonnées de l'individu minimal trouvé : {res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]}"
+    )
+    print(f"Score de performance de l'individu minimal trouvé : {value}")"""
 
     """alg = AlgoGenetique(
         F8(),
@@ -173,16 +201,20 @@ if __name__ == "__main__":
             [-600, 600],
             [-600, 600],
         ],
-        100,
-        100,
-        CodageHexadecimal([52, 10]),
-        RoueDeLaFortune(),
+        50,
+        200,
+        CodageBinaire([52, 10]),
+        Tournoi(0.8),
         CroisementSimple(),
+        MutationParFlipping(0.7),
     )
     res, value = alg.get_min()
-    print(res[0], res[1], value)"""
+    print(
+        f"Coordonnées de l'individu minimal trouvé : {res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]}"
+    )
+    print(f"Score de performance de l'individu minimal trouvé : {value}")"""
 
-    alg = AlgoGenetique(
+    """alg = AlgoGenetique(
         F9(),
         [
             [-500, 500],
@@ -197,10 +229,18 @@ if __name__ == "__main__":
             [-500, 500],
         ],
         100,
-        100,
+        500,
         CodageBinaire([52, 10]),
         RoueDeLaFortune(),
         CroisementSimple(),
+        MutationParPermutation(0.6),
     )
     res, value = alg.get_min()
-    print(res[0], res[1], value)
+    print(
+        f"Coordonnées de l'individu minimal trouvé : {res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]}"
+    )
+    print(
+        f"Score de performance de l'individu minimal trouvé : {value}", F9().eval(res)
+    )
+    """
+    pass
